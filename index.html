@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lifteat — Antoine Wu | Diététicien-Nutritionniste</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --v:#2a7a4b;--v2:#1e5c38;--vl:rgba(42,122,75,.1);--vg:rgba(42,122,75,.06);
+  --n:#111;--n2:#1a1a1a;--n3:#2a2a2a;--n4:#444;--n5:#888;--n6:#bbb;
+  --bg:#f7f6f2;--bg2:#fff;--bg3:#f2f0eb;--b1:#e5e2db;--b2:#d0cdc6;
+  --or:#b8860b;--bl:#1a5c9e;--rouge:#c0392b;--vio:#5c3fa0;
+  --fh:'Bebas Neue',sans-serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --r:10px;--r2:14px;--r3:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--n);font-family:var(--fb);font-size:14px;line-height:1.6;min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+
+/* ─── TOPBAR ─── */
+.topbar{background:var(--n);height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:300;border-bottom:1px solid var(--n3);}
+.tb-logo{display:flex;align-items:center;gap:12px;}
+.tb-brand{font-family:var(--fh);font-size:20px;letter-spacing:1.5px;color:#fff;}
+.tb-right{display:flex;align-items:center;gap:14px;}
+.tb-name{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.04em;line-height:1.4;text-align:right;}
+.tb-name b{color:rgba(255,255,255,.85);display:block;}
+.mode-btn{padding:6px 14px;border-radius:6px;font-family:var(--fm);font-size:10px;cursor:pointer;letter-spacing:.05em;border:none;transition:all .15s;}
+.mode-btn-diet{background:rgba(42,122,75,.25);border:1px solid rgba(42,122,75,.5)!important;color:#6fcf97;}
+.mode-btn-pat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)!important;color:rgba(255,255,255,.6);}
+
+/* ─── TABS ─── */
+.tabs{background:var(--bg2);border-bottom:1px solid var(--b1);display:flex;padding:0 28px;overflow-x:auto;gap:0;}
+.tab{padding:13px 20px;font-family:var(--fm);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--n5);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;}
+.tab.on{color:var(--v);border-bottom-color:var(--v);}
+.tab:hover:not(.on){color:var(--n4);}
+
+/* ─── WRAP ─── */
+.wrap{max-width:920px;margin:0 auto;padding:36px 28px 80px;}
+
+/* ─── VIEWS ─── */
+.view{display:none;}
+.view.on{display:block;animation:fi .25s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ─── PAGE HEADER ─── */
+.ph{margin-bottom:30px;}
+.ph-ey{font-family:var(--fm);font-size:10px;color:var(--v);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.ph-title{font-family:var(--fh);font-size:42px;letter-spacing:2px;line-height:1;margin-bottom:4px;}
+.ph-sub{font-family:var(--fm);font-size:12px;color:var(--n5);}
+
+/* ─── CARDS ─── */
+.card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r2);padding:22px 24px;margin-bottom:14px;}
+.card.top-v{border-top:3px solid var(--v);}
+.card.top-or{border-top:3px solid var(--or);}
+.card.dark{background:var(--n);color:#fff;border-color:var(--n3);}
+
+/* ─── FORMS ─── */
+.fg{margin-bottom:18px;}
+.fg-lbl{font-family:var(--fm);font-size:10px;color:var(--v);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--b1);}
+.f{display:flex;flex-direction:column;gap:5px;}
+.f label{font-family:var(--fm);font-size:10px;color:var(--n5);letter-spacing:.04em;}
+.f input,.f select,.f textarea{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r);color:var(--n);font-family:var(--fb);font-size:14px;padding:10px 12px;outline:none;transition:border-color .2s;width:100%;}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--v);}
+.f select option{background:var(--bg3);}
+.f textarea{resize:vertical;min-height:65px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+
+/* ─── RADIO CARDS ─── */
+.rc-g{display:flex;flex-wrap:wrap;gap:8px;}
+.rc{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r);padding:10px 14px;cursor:pointer;transition:all .15s;}
+.rc.on{border-color:var(--v);background:var(--vl);}
+.rc-t{font-size:13px;font-weight:600;}
+.rc-s{font-size:11px;color:var(--n5);}
+
+/* ─── TAGS ─── */
+.tg-wrap{display:flex;flex-wrap:wrap;gap:7px;}
+.tg{border:1px solid var(--b1);border-radius:6px;padding:5px 13px;cursor:pointer;font-size:12px;color:var(--n5);background:var(--bg3);transition:all .15s;user-select:none;}
+.tg.on{border-color:var(--v);color:var(--v);background:var(--vl);}
+
+/* ─── BTNS ─── */
+.btn{padding:11px 26px;border-radius:var(--r);font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;}
+.btn-v{background:var(--v);color:#fff;}
+.btn-v:hover{background:var(--v2);}
+.btn-g{background:transparent;color:var(--n5);border:1px solid var(--b1);}
+.btn-g:hover{border-color:var(--b2);color:var(--n);}
+.btn-row{display:flex;gap:10px;margin-top:22px;justify-content:flex-end;}
+.btn-big{background:var(--v);color:#fff;width:100%;padding:15px;font-size:14px;font-weight:700;border-radius:12px;border:none;cursor:pointer;font-family:var(--fb);display:flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;transition:all .2s;}
+.btn-big:hover{background:var(--v2);transform:translateY(-1px);}
+
+/* ─── NOTE ─── */
+.note{background:var(--vg);border:1px solid rgba(42,122,75,.2);border-radius:var(--r);padding:12px 16px;font-size:12px;color:var(--n4);line-height:1.6;margin-bottom:16px;}
+.note b{color:var(--v);}
+.note.or{background:rgba(184,134,11,.07);border-color:rgba(184,134,11,.25);}
+.note.or b{color:var(--or);}
+.note.rouge{background:rgba(192,57,43,.06);border-color:rgba(192,57,43,.2);}
+.note.rouge b{color:var(--rouge);}
+
+/* ─── BADGES ─── */
+.badge{display:inline-block;font-family:var(--fm);font-size:10px;padding:3px 11px;border-radius:20px;letter-spacing:.04em;border:1px solid;}
+.bv{border-color:var(--v);color:var(--v);background:var(--vl);}
+.bor{border-color:var(--or);color:var(--or);background:rgba(184,134,11,.1);}
+.bbl{border-color:var(--bl);color:var(--bl);background:rgba(26,92,158,.1);}
+.bn{border-color:var(--n4);color:var(--n4);background:rgba(0,0,0,.04);}
+
+/* ─── DIV ─── */
+.div{height:1px;background:var(--b1);margin:20px 0;}
+
+/* ─── MACROS ─── */
+.mac-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;}
+.mac{background:var(--bg3);border-radius:var(--r);padding:14px;text-align:center;}
+.mac-l{font-family:var(--fm);font-size:9px;color:var(--n5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+.mac-v{font-family:var(--fh);font-size:30px;letter-spacing:1px;}
+.mac-u{font-family:var(--fm);font-size:10px;color:var(--n5);margin-top:2px;}
+.mac.kc .mac-v{color:var(--rouge);}
+.mac.pr .mac-v{color:var(--bl);}
+.mac.gl .mac-v{color:var(--or);}
+.mac.li .mac-v{color:var(--vio);}
+
+/* ─── PROGRAMME PDF STYLE ─── */
+.prog-wrap{font-family:var(--fb);}
+.prog-hero{background:var(--n);color:#fff;border-radius:var(--r3);padding:28px 32px;margin-bottom:20px;position:relative;overflow:hidden;}
+.prog-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(42,122,75,.15);border-radius:50%;}
+.prog-hero::after{content:'';position:absolute;bottom:-30px;left:60px;width:120px;height:120px;background:rgba(42,122,75,.08);border-radius:50%;}
+.prog-disc{background:var(--v);color:#fff;font-family:var(--fh);font-size:13px;letter-spacing:1px;padding:4px 14px;border-radius:4px;display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;}
+.prog-nom{font-family:var(--fh);font-size:44px;letter-spacing:2px;margin-bottom:16px;position:relative;z-index:1;}
+.prog-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1;}
+.prog-info-item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:10px 14px;}
+.prog-info-label{font-family:var(--fm);font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.prog-info-val{font-size:13px;font-weight:600;color:#fff;}
+.prog-note{background:rgba(26,92,158,.15);border:1px solid rgba(26,92,158,.3);border-radius:var(--r);padding:12px 16px;font-size:12px;color:rgba(255,255,255,.75);line-height:1.6;margin-top:14px;position:relative;z-index:1;}
+
+.besoin-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+.besoin-card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:14px;text-align:center;}
+.besoin-lbl{font-family:var(--fm);font-size:9px;color:var(--n5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+.besoin-val{font-family:var(--fh);font-size:22px;letter-spacing:.5px;color:var(--n);}
+.besoin-unit{font-family:var(--fm);font-size:10px;color:var(--n5);margin-top:2px;}
+.besoin-card.kc .besoin-val{color:var(--rouge);}
+.besoin-card.pr .besoin-val{color:var(--bl);}
+.besoin-card.gl .besoin-val{color:var(--or);}
+.besoin-card.li .besoin-val{color:var(--vio);}
+.besoin-card.eau .besoin-val{color:var(--bl);font-size:17px;}
+
+.repas-sec{margin-bottom:20px;}
+.repas-header{display:flex;align-items:center;justify-content:space-between;background:var(--n);color:#fff;border-radius:var(--r) var(--r) 0 0;padding:13px 18px;}
+.repas-title{font-family:var(--fh);font-size:20px;letter-spacing:1px;}
+.repas-kcal{font-family:var(--fm);font-size:10px;color:rgba(255,255,255,.5);text-align:right;line-height:1.6;}
+.repas-macros{display:flex;gap:8px;margin-top:4px;}
+.repas-mac{font-family:var(--fm);font-size:10px;padding:2px 8px;border-radius:4px;}
+.rm-p{background:rgba(26,92,158,.3);color:#93c5fd;}
+.rm-g{background:rgba(184,134,11,.3);color:#fbbf24;}
+.rm-l{background:rgba(92,63,160,.3);color:#c4b5fd;}
+.repas-body{background:var(--bg2);border:1px solid var(--b1);border-top:none;border-radius:0 0 var(--r) var(--r);padding:18px 20px;}
+.alim-bloc{margin-bottom:14px;}
+.alim-bloc:last-child{margin-bottom:0;}
+.alim-cat{font-family:var(--fm);font-size:10px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.alim-cat::after{content:'';flex:1;height:1px;background:var(--b1);}
+.alim-line{display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.04);}
+.alim-line:last-child{border-bottom:none;}
+.alim-dot{width:5px;height:5px;border-radius:50%;margin-top:7px;flex-shrink:0;}
+.alim-nom{font-size:13px;font-weight:500;flex:1;}
+.alim-qty{font-family:var(--fm);font-size:11px;color:var(--n5);flex-shrink:0;}
+.alim-note{font-size:11px;color:var(--n5);font-style:italic;margin-top:2px;}
+.alim-ou{font-family:var(--fm);font-size:10px;color:var(--or);text-transform:uppercase;letter-spacing:.06em;margin:4px 0;padding-left:15px;}
+.alim-off{font-family:var(--fm);font-size:10px;color:var(--rouge);background:rgba(192,57,43,.06);border-radius:4px;padding:4px 10px;margin-top:6px;display:inline-block;}
+
+.comp-sec{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r2);padding:18px 20px;margin-bottom:20px;}
+.comp-title{font-family:var(--fh);font-size:18px;letter-spacing:1px;margin-bottom:12px;}
+.comp-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--b1);font-size:13px;}
+.comp-item:last-child{border-bottom:none;}
+.comp-nom{font-weight:600;flex:1;}
+.comp-dose{font-family:var(--fm);font-size:11px;color:var(--v);}
+
+.partners-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:16px;}
+.partner-card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:14px;text-align:center;}
+.partner-nom{font-weight:700;font-size:13px;margin-bottom:4px;}
+.partner-remise{font-family:var(--fm);font-size:11px;color:var(--v);margin-bottom:6px;}
+.partner-code{background:var(--n);color:#fff;font-family:var(--fh);font-size:15px;letter-spacing:2px;padding:5px 14px;border-radius:6px;display:inline-block;}
+
+.prog-footer{background:var(--n);color:#fff;border-radius:var(--r3);padding:20px 28px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.pf-left{display:flex;align-items:center;gap:14px;}
+.pf-name{font-family:var(--fh);font-size:24px;letter-spacing:1.5px;}
+.pf-title{font-family:var(--fm);font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.06em;margin-top:2px;}
+.pf-links{display:flex;flex-direction:column;gap:4px;}
+.pf-link{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px;}
+.pf-link b{color:rgba(255,255,255,.8);}
+
+/* ─── CONSEILS ─── */
+.conseil-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.conseil{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r2);padding:20px;}
+.c-tag{font-family:var(--fm);font-size:9px;padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:10px;letter-spacing:.05em;}
+.c-icon{font-size:22px;margin-bottom:8px;}
+.c-title{font-family:var(--fh);font-size:18px;letter-spacing:1px;margin-bottom:8px;}
+.c-body{font-size:13px;color:var(--n4);line-height:1.7;}
+
+/* ─── NUTRIPURE ─── */
+.np-promo{background:var(--n);border-radius:var(--r2);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.np-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+.np-card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r2);padding:16px;transition:all .15s;}
+.np-card:hover{border-color:var(--v);transform:translateY(-1px);}
+.np-nom{font-size:13px;font-weight:700;margin-bottom:3px;}
+.np-dose{font-family:var(--fm);font-size:10px;color:var(--v);margin-bottom:7px;}
+.np-desc{font-size:12px;color:var(--n5);line-height:1.5;margin-bottom:10px;}
+.np-btn{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--v);background:var(--vl);padding:7px 12px;border-radius:6px;border:none;cursor:pointer;text-decoration:none;transition:all .15s;}
+.np-btn:hover{background:var(--v);color:#fff;}
+.np-promo-badge{background:var(--or);color:#fff;font-size:10px;padding:1px 8px;border-radius:10px;font-family:var(--fm);}
+.cat-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+.cf{padding:5px 16px;border-radius:20px;border:1px solid var(--b1);background:var(--bg2);color:var(--n5);font-family:var(--fm);font-size:10px;cursor:pointer;transition:all .15s;letter-spacing:.04em;}
+.cf.on{border-color:var(--v);background:var(--vl);color:var(--v);}
+
+/* ─── SUIVI ─── */
+.sv-hdr{background:var(--n);color:#fff;border-radius:var(--r2);padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.sv-w{font-family:var(--fh);font-size:26px;letter-spacing:1px;}
+.sv-d{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.4);}
+.sv-badge{background:rgba(42,122,75,.3);border:1px solid var(--v);color:#6fcf97;font-family:var(--fm);font-size:10px;padding:4px 12px;border-radius:20px;}
+.sl-card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;}
+.sl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.sl-nom{font-size:13px;font-weight:600;}
+.sl-sc{font-family:var(--fh);font-size:22px;color:var(--v);}
+.sl-desc{font-size:11px;color:var(--n5);margin-bottom:10px;}
+.sl-track{display:flex;align-items:center;gap:10px;}
+.sl-track input{flex:1;accent-color:var(--v);}
+.sl-lbl{font-size:10px;color:var(--n6);}
+.sv-qf{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.sv-qf label{font-family:var(--fm);font-size:10px;color:var(--n5);letter-spacing:.04em;}
+.sv-qf textarea{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r);color:var(--n);font-family:var(--fb);font-size:13px;padding:10px 12px;outline:none;resize:vertical;min-height:60px;transition:border-color .2s;width:100%;}
+.sv-qf textarea:focus{border-color:var(--v);}
+.hist-item{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.hist-w{font-family:var(--fh);font-size:16px;}
+.hist-d{font-family:var(--fm);font-size:10px;color:var(--n5);}
+.hist-scores{display:flex;flex-wrap:wrap;gap:6px;}
+.hs{background:var(--bg3);border-radius:5px;padding:3px 9px;font-family:var(--fm);font-size:11px;color:var(--n5);}
+.hs b{color:var(--v);}
+
+/* ─── LOGIN ─── */
+#login-overlay{position:fixed;inset:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;z-index:9999;}
+#login-overlay.h{display:none;}
+.login-box{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:14px;padding:28px;width:340px;}
+.login-title{font-family:var(--fh);font-size:26px;letter-spacing:2px;color:#fff;text-align:center;margin-bottom:6px;}
+.login-sub{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.35);text-align:center;margin-bottom:20px;letter-spacing:.04em;}
+#login-pwd{width:100%;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-size:14px;padding:12px 14px;outline:none;font-family:var(--fm);letter-spacing:.06em;margin-bottom:8px;}
+#login-err{font-size:12px;color:#e05050;margin-bottom:10px;display:none;text-align:center;}
+.login-btn{width:100%;background:var(--v);color:#fff;font-weight:700;font-size:14px;padding:13px;border:none;border-radius:8px;cursor:pointer;font-family:var(--fb);}
+
+/* ─── DIÉT PILLS ─── */
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px;}
+.pill{font-family:var(--fm);font-size:10px;padding:4px 12px;border-radius:20px;border:1px solid var(--b1);color:var(--n5);cursor:pointer;background:none;transition:all .2s;}
+.pill.on{border-color:var(--v);color:var(--v);background:var(--vl);}
+.pill.ok{border-color:var(--v2);color:var(--v2);background:rgba(30,92,56,.08);}
+.pill.ok::before{content:"✓ ";}
+.qsec{display:none;}
+.qsec.on{display:block;animation:fi .25s ease;}
+
+/* ─── PLAN RESULT ─── */
+.plan-hero{background:var(--n);color:#fff;border-radius:var(--r2);padding:22px 26px;margin-bottom:22px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.plan-nom{font-family:var(--fh);font-size:40px;letter-spacing:2px;line-height:1;margin-bottom:6px;}
+.plan-meta{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.45);line-height:1.8;}
+.plan-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.plan-actions{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.pa{padding:9px 18px;border-radius:var(--r);font-family:var(--fb);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;border:1px solid;}
+.pa-v{background:var(--v);color:#fff;border-color:var(--v);}
+.pa-g{background:transparent;color:var(--n4);border-color:var(--b1);}
+.pa-g:hover{border-color:var(--b2);}
+
+.tpl-tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--bg3);padding:4px;border-radius:10px;border:1px solid var(--b1);}
+.ttab{flex:1;padding:10px 8px;text-align:center;cursor:pointer;border-radius:8px;font-size:11px;font-weight:600;color:var(--n5);transition:all .15s;background:none;border:none;}
+.ttab.on{background:var(--bg2);color:var(--v);box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.tbdy{display:none;}
+.tbdy.on{display:block;}
+
+.repas-bloc{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r2);margin-bottom:12px;overflow:hidden;}
+.rh{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--b1);}
+.rh-l{display:flex;align-items:center;gap:10px;}
+.r-time{background:var(--v);color:#fff;font-family:var(--fm);font-size:10px;padding:2px 9px;border-radius:4px;}
+.r-nom{font-size:13px;font-weight:600;}
+.r-mac{font-family:var(--fm);font-size:10px;color:var(--n5);}
+.r-body{padding:14px 18px;}
+.a-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.04);}
+.a-row:last-child{border-bottom:none;}
+.a-dot{width:5px;height:5px;border-radius:50%;margin-top:7px;flex-shrink:0;}
+.a-info{flex:1;}
+.a-nom{font-size:13px;font-weight:500;}
+.a-qty{font-family:var(--fm);font-size:11px;color:var(--n5);}
+.a-note{font-size:11px;color:var(--n5);font-style:italic;margin-top:2px;}
+
+.timing-b{background:rgba(26,92,158,.06);border:1px solid rgba(26,92,158,.2);border-radius:var(--r);padding:14px 18px;margin-bottom:18px;}
+.timing-t{font-family:var(--fm);font-size:10px;color:var(--bl);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
+.timing-row{display:flex;gap:10px;font-size:12px;margin-bottom:5px;}
+.timing-lbl{color:var(--bl);font-family:var(--fm);font-size:10px;min-width:115px;flex-shrink:0;padding-top:1px;}
+
+/* ─── LDNG ─── */
+.ldg{display:none;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;gap:20px;text-align:center;}
+.ldg.on{display:flex;}
+.ldg-bar-wrap{width:320px;height:3px;background:var(--b1);border-radius:2px;overflow:hidden;}
+.ldg-bar{height:100%;background:var(--v);border-radius:2px;width:0;transition:width .4s ease;}
+.ldg-step{font-family:var(--fm);font-size:11px;color:var(--n5);min-height:18px;}
+
+/* ─── PLAN WRAP ─── */
+.plan-wrap{display:none;}
+.plan-wrap.on{display:block;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px){
+  .wrap{padding:20px 14px 60px;}
+  .g2,.g3,.g4{grid-template-columns:1fr;}
+  .mac-row{grid-template-columns:1fr 1fr;}
+  .besoin-row{grid-template-columns:1fr 1fr 1fr;}
+  .ph-title{font-size:32px;}
+  .prog-nom{font-size:32px;}
+  .prog-info-grid{grid-template-columns:1fr;}
+}
+@media print{
+  .topbar,.tabs,.plan-actions,.pills,.btn-row,.btn-big,.mode-btn{display:none!important;}
+  body{background:white;}
+  .wrap{padding:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── LOGIN DIÉT ─── -->
+<div id="login-overlay" class="h">
+  <div class="login-box">
+    <div class="login-title">ESPACE DIÉT</div>
+    <div class="login-sub">Accès réservé — Antoine Wu</div>
+    <input type="password" id="login-pwd" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')doLogin()">
+    <div id="login-err">Mot de passe incorrect</div>
+    <button class="login-btn" onclick="doLogin()">Accéder →</button>
+  </div>
+  <button onclick="cancelLogin()" style="color:rgba(255,255,255,.25);background:none;border:none;cursor:pointer;font-family:var(--fm);font-size:11px;margin-top:10px;">← Retour espace patient</button>
+</div>
+
+<!-- ─── TOPBAR ─── -->
+<div class="topbar">
+  <div class="tb-logo">
+    <div class="tb-brand">LIFTEAT</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-name"><b>Antoine Wu</b>Diététicien-Nutritionniste</div>
+    <button class="mode-btn mode-btn-diet" id="btn-mode" onclick="toggleMode()">⚕ Mode diét</button>
+  </div>
+</div>
+
+<!-- ─── ESPACE PATIENT ─── -->
+<div id="app-patient">
+  <div class="tabs" id="tabs-pat">
+    <button class="tab on" onclick="patNav('programme')" id="pnt-programme">Mon programme</button>
+    <button class="tab" onclick="patNav('conseils')" id="pnt-conseils">Conseils</button>
+    <button class="tab" onclick="patNav('complements')" id="pnt-complements">Compléments</button>
+    <button class="tab" onclick="patNav('suivi')" id="pnt-suivi">Suivi hebdo</button>
+    <button class="tab" onclick="patNav('bilan')" id="pnt-bilan">Mon bilan</button>
+  </div>
+
+  <div class="wrap">
+
+    <!-- MON PROGRAMME -->
+    <div class="view on" id="pv-programme">
+      <div id="prog-affiche">
+        <!-- Programme généré ou état vide -->
+        <div style="text-align:center;padding:70px 20px;">
+          <div style="font-size:42px;margin-bottom:20px;opacity:.25">📋</div>
+          <div style="font-family:var(--fh);font-size:28px;letter-spacing:1px;margin-bottom:8px;">Votre programme arrive bientôt</div>
+          <div style="font-size:13px;color:var(--n5);margin-bottom:24px;">Remplissez votre bilan diététique pour recevoir votre programme personnalisé.</div>
+          <button class="btn btn-v" onclick="patNav('bilan')">Remplir mon bilan →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONSEILS -->
+    <div class="view" id="pv-conseils">
+      <div class="ph">
+        <div class="ph-ey">Approche globale</div>
+        <div class="ph-title">VOS CONSEILS</div>
+        <div class="ph-sub">Nutrition · Récupération · Bien-être · Traditions thérapeutiques</div>
+      </div>
+      <div class="conseil-grid">
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(42,122,75,.1);color:var(--v)">Nutrition</div>
+          <div class="c-icon">🥗</div>
+          <div class="c-title">Alimentation</div>
+          <div class="c-body">Aliments peu transformés. Batch cooking le dimanche. Régularité des repas = glycémie stable. Peser toujours les féculents et protéines <b>CRU</b> — le riz triple à la cuisson, les pâtes doublent.</div>
+        </div>
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(26,92,158,.1);color:var(--bl)">Récupération</div>
+          <div class="c-icon">⚡</div>
+          <div class="c-title">Récupération</div>
+          <div class="c-body">Fenêtre anabolique : 30 min post-effort max. Protéines rapides + glucides rapides. Douche froide 90s après l'entraînement. Le sommeil reste votre meilleur outil de récupération.</div>
+        </div>
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(92,63,160,.1);color:var(--vio)">Sommeil</div>
+          <div class="c-icon">🌙</div>
+          <div class="c-title">Sommeil</div>
+          <div class="c-body">7 à 9h pour un athlète. Écrans coupés 1h avant le coucher. Chambre fraîche (~18°C). Magnésium bisglycinate au coucher améliore le sommeil profond et la récupération musculaire.</div>
+        </div>
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(184,134,11,.1);color:var(--or)">Stress</div>
+          <div class="c-icon">🧠</div>
+          <div class="c-title">Gestion du stress</div>
+          <div class="c-body">Le cortisol chronique favorise le stockage des graisses et freine la récupération. Cohérence cardiaque 5 min × 3/jour. Caféine max avant 14h. Rhodiola en période de compétition.</div>
+        </div>
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(42,122,75,.1);color:var(--v)">Naturopathie</div>
+          <div class="c-icon">🌿</div>
+          <div class="c-title">Naturopathie</div>
+          <div class="c-body">Curcuma + poivre noir dans tous vos plats chauds. Gingembre frais en tisane. Jeûne 16/8 hors compétition. Aloe vera 30ml à jeun si troubles digestifs persistants.</div>
+        </div>
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(184,134,11,.1);color:var(--or)">Traditions</div>
+          <div class="c-icon">✨</div>
+          <div class="c-title">Médecine de la Sunnah</div>
+          <div class="c-body">Huile de nigelle (1 c.à.c à jeun). Miel brut sidr ou Manuka (propriétés antimicrobiennes et cicatrisantes). Dattes Ajwa le matin. Vinaigre de cidre brut avant les repas — glycémie et digestion.</div>
+        </div>
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(26,92,158,.1);color:var(--bl)">Hydratation</div>
+          <div class="c-icon">💧</div>
+          <div class="c-title">Hydratation</div>
+          <div class="c-body">2–3L/jour minimum. Urine jaune pâle = bonne hydratation. Électrolytes indispensables si effort &gt;60 min ou forte chaleur. +2L les jours d'entraînement.</div>
+        </div>
+        <div class="conseil">
+          <div class="c-tag" style="background:rgba(42,122,75,.1);color:var(--v)">Digestion</div>
+          <div class="c-icon">🫁</div>
+          <div class="c-title">Santé digestive</div>
+          <div class="c-body">Minimum 300–400g de légumes verts par jour. Fibres progressivement. Aliments fermentés (yaourt, kéfir). Probiotiques en cure 3 mois. Pas d'AINS en automédication — altèrent la muqueuse.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLÉMENTS -->
+    <div class="view" id="pv-complements">
+      <div class="ph">
+        <div class="ph-ey">Partenaires officiels</div>
+        <div class="ph-title">COMPLÉMENTS</div>
+        <div class="ph-sub">Sélection recommandée par Antoine Wu — codes promo inclus</div>
+      </div>
+
+      <!-- PARTENAIRES -->
+      <div class="card dark" style="margin-bottom:20px;">
+        <div style="font-family:var(--fh);font-size:22px;letter-spacing:1px;color:#fff;margin-bottom:14px;">Codes promo partenaires</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;">
+          <div class="partner-card" style="background:#1a1a1a;border-color:#2a2a2a;">
+            <div class="partner-nom" style="color:#fff;">Nutripure</div>
+            <div class="partner-remise">−10%</div>
+            <div class="partner-code" style="background:var(--v);" onclick="copyCode('LIFTEAT',this)">LIFTEAT</div>
+          </div>
+          <div class="partner-card" style="background:#1a1a1a;border-color:#2a2a2a;">
+            <div class="partner-nom" style="color:#fff;">Ruche d'Orient</div>
+            <div class="partner-remise">−15%</div>
+            <div class="partner-code" onclick="copyCode('LIFTEAT15',this)">LIFTEAT15</div>
+          </div>
+          <div class="partner-card" style="background:#1a1a1a;border-color:#2a2a2a;">
+            <div class="partner-nom" style="color:#fff;">Ozers</div>
+            <div class="partner-remise">−15%</div>
+            <div class="partner-code" onclick="copyCode('LIFTEAT15',this)">LIFTEAT15</div>
+          </div>
+          <div class="partner-card" style="background:#1a1a1a;border-color:#2a2a2a;">
+            <div class="partner-nom" style="color:#fff;">OKO Europe</div>
+            <div class="partner-remise">−10%</div>
+            <div class="partner-code" onclick="copyCode('OKOLIFTEAT',this)">OKOLIFTEAT</div>
+          </div>
+          <div class="partner-card" style="background:#1a1a1a;border-color:#2a2a2a;">
+            <div class="partner-nom" style="color:#fff;">High One Sport</div>
+            <div class="partner-remise">−15%</div>
+            <div class="partner-code" onclick="copyCode('LIFTEAT15',this)">LIFTEAT15</div>
+          </div>
+        </div>
+        <div style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;">Cliquez sur un code pour le copier</div>
+      </div>
+
+      <div class="cat-filters">
+        <button class="cf on" onclick="filterNP('all',this)">Tous</button>
+        <button class="cf" onclick="filterNP('sante',this)">Santé</button>
+        <button class="cf" onclick="filterNP('performance',this)">Performance</button>
+        <button class="cf" onclick="filterNP('recuperation',this)">Récupération</button>
+        <button class="cf" onclick="filterNP('seche',this)">Sèche</button>
+        <button class="cf" onclick="filterNP('masse',this)">Masse</button>
+      </div>
+      <div class="np-grid" id="np-grid"></div>
+    </div>
+
+    <!-- SUIVI HEBDO -->
+    <div class="view" id="pv-suivi">
+      <div class="ph">
+        <div class="ph-ey">À remplir chaque lundi matin</div>
+        <div class="ph-title">SUIVI HEBDO</div>
+        <div class="ph-sub">Votre bilan de la semaine transmis à Antoine</div>
+      </div>
+      <div class="sv-hdr">
+        <div><div class="sv-w" id="sv-sem">—</div><div class="sv-d" id="sv-date">—</div></div>
+        <div class="sv-badge" id="sv-badge">En cours</div>
+      </div>
+      <div class="card">
+        <div style="font-family:var(--fh);font-size:18px;letter-spacing:1px;margin-bottom:12px;">Mesures</div>
+        <div class="g2">
+          <div class="f"><label>Poids (kg)</label><input type="number" id="sv-poids" placeholder="75.2" step=".1"></div>
+          <div class="f"><label>Tour de taille (cm)</label><input type="number" id="sv-tt" placeholder="82"></div>
+        </div>
+      </div>
+      <div id="sv-sliders"></div>
+      <div class="card" style="margin-top:8px;">
+        <div style="font-family:var(--fh);font-size:18px;letter-spacing:1px;margin-bottom:14px;">Questions de la semaine</div>
+        <div class="sv-qf"><label>Repas difficiles à respecter</label><textarea id="svq1" placeholder="ex: dîner du jeudi, manque de temps..."></textarea></div>
+        <div class="sv-qf"><label>Écarts alimentaires</label><textarea id="svq2" placeholder="ex: repas de famille samedi..."></textarea></div>
+        <div class="sv-qf"><label>Séances d'entraînement (nb, intensité, récup)</label><textarea id="svq3" placeholder="ex: 4 séances prévues, 3 réalisées..."></textarea></div>
+        <div class="sv-qf"><label>Compléments pris</label><textarea id="svq4" placeholder="ex: tous sauf magnésium 2 fois oublié..."></textarea></div>
+        <div class="sv-qf"><label>Ressentis physiques</label><textarea id="svq5" placeholder="ex: fatigue mardi, bonne énergie vendredi..."></textarea></div>
+        <div class="sv-qf"><label>Questions pour Antoine</label><textarea id="svq6" placeholder="ex: peut-on remplacer le riz par des pâtes le soir ?"></textarea></div>
+      </div>
+      <button class="btn-big" onclick="saveSuivi()" id="sv-save-btn">Enregistrer mon bilan</button>
+      <div style="margin-top:28px;">
+        <div style="font-family:var(--fm);font-size:10px;color:var(--n5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;">Historique</div>
+        <div id="sv-hist"></div>
+      </div>
+    </div>
+
+    <!-- MON BILAN -->
+    <div class="view" id="pv-bilan">
+      <div class="ph">
+        <div class="ph-ey">Étape unique</div>
+        <div class="ph-title">MON BILAN</div>
+        <div class="ph-sub">Remplissez ce questionnaire — votre programme est généré instantanément</div>
+      </div>
+      <div class="note"><b>Confidentiel.</b> Ces informations servent uniquement à personnaliser votre programme.</div>
+      <div class="card">
+        <div class="fg"><div class="fg-lbl">Identité</div>
+          <div class="g3">
+            <div class="f"><label>Prénom *</label><input id="pb-prenom" placeholder="Thomas"></div>
+            <div class="f"><label>Nom *</label><input id="pb-nom" placeholder="Dupont"></div>
+            <div class="f"><label>Date de naissance</label><input id="pb-ddn" placeholder="15/03/1995" oninput="calcAgePat()"></div>
+          </div>
+          <div class="g3" style="margin-top:12px;">
+            <div class="f"><label>Âge (calculé)</label><input id="pb-age" readonly style="color:var(--v);cursor:default;"></div>
+            <div class="f"><label>Email *</label><input id="pb-email" type="email" placeholder="votre@email.com"></div>
+            <div class="f"><label>Téléphone</label><input id="pb-tel" placeholder="+33 6..."></div>
+          </div>
+          <div class="g3" style="margin-top:12px;">
+            <div class="f"><label>Profession</label><input id="pb-profession" placeholder="Infirmier, développeur, commercial..."></div>
+            <div class="f"><label>Type de métier</label>
+              <select id="pb-metier">
+                <option value="">— Sélectionner —</option>
+                <option value="sedentaire">Sédentaire (bureau, assis toute la journée)</option>
+                <option value="leger">Légèrement actif (quelques déplacements)</option>
+                <option value="actif">Actif (debout, marche fréquente)</option>
+                <option value="tres_actif">Très actif (travail physique, port de charges)</option>
+              </select>
+            </div>
+            <div class="f"><label>Pas par jour (en moyenne)</label>
+              <select id="pb-pas">
+                <option value="">— Estimation —</option>
+                <option value="moins2000">Moins de 2 000 pas</option>
+                <option value="2000_5000">2 000 – 5 000 pas</option>
+                <option value="5000_8000">5 000 – 8 000 pas</option>
+                <option value="8000_12000">8 000 – 12 000 pas</option>
+                <option value="plus12000">Plus de 12 000 pas</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Mesures</div>
+          <div class="g4">
+            <div class="f"><label>Poids (kg) *</label><input type="number" id="pb-poids" placeholder="75" step=".1"></div>
+            <div class="f"><label>Taille (cm) *</label><input type="number" id="pb-taille" placeholder="178"></div>
+            <div class="f"><label>Poids cible (kg)</label><input type="number" id="pb-pcible" placeholder="72" step=".1"></div>
+            <div class="f"><label>Tour de taille (cm)</label><input type="number" id="pb-tt" placeholder="82"></div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Objectif *</div>
+          <div class="rc-g">
+            <div class="rc on" id="rc-reequil" onclick="setObj('reequil')"><div class="rc-t">Rééquilibrage alimentaire</div><div class="rc-s">Maintien du poids, habitudes saines</div></div>
+            <div class="rc" id="rc-seche" onclick="setObj('seche')"><div class="rc-t">Perte de poids</div><div class="rc-s">Déficit modéré, préservation musculaire</div></div>
+            <div class="rc" id="rc-masse" onclick="setObj('masse')"><div class="rc-t">Prise de masse propre</div><div class="rc-s">Surplus contrôlé, qualité musculaire</div></div>
+            <div class="rc" id="rc-perf" onclick="setObj('perf')"><div class="rc-t">Performance sportive</div><div class="rc-s">Optimisation énergie et récupération</div></div>
+            <div class="rc" id="rc-pesee" onclick="setObj('pesee')"><div class="rc-t">Pesée / Compétition</div><div class="rc-s">Protocole sport à catégorie de poids</div></div>
+            <div class="rc" id="rc-sante" onclick="setObj('sante')"><div class="rc-t">Santé & pathologie</div><div class="rc-s">Adaptation selon problématiques médicales</div></div>
+            <div class="rc" id="rc-seche_acc" onclick="setObj('seche_acc')"><div class="rc-t">Perte de poids accélérée</div><div class="rc-s">Déficit élevé, encadrement strict</div></div>
+            <div class="rc" id="rc-masse_grand" onclick="setObj('masse_grand')"><div class="rc-t">Grande prise de masse</div><div class="rc-s">Surplus important, volume musculaire max</div></div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Alimentation</div>
+          <div class="g3">
+            <div class="f"><label>Repas / jour</label>
+              <select id="pb-nrepas"><option value="3">3 repas</option><option value="4" selected>4 repas</option><option value="5">5 repas</option></select>
+            </div>
+            <div class="f"><label>Régime</label>
+              <select id="pb-regime"><option value="omnivore">Omnivore</option><option value="vege">Végétarien</option><option value="sl">Sans lactose</option><option value="sg">Sans gluten</option></select>
+            </div>
+            <div class="f"><label>Eau (L/jour)</label><input type="number" id="pb-eau" placeholder="2" step=".5"></div>
+          </div>
+          <div class="f" style="margin-top:12px;"><label>Allergies / intolérances</label><input id="pb-allergie" placeholder="lactose, arachides, gluten..."></div>
+          <div class="f" style="margin-top:10px;"><label>Aliments difficiles à éviter</label><input id="pb-chouchou" placeholder="pain, fromage, chocolat..."></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Sport & entraînement</div>
+          <div class="f"><label>Activité physique (optionnel)</label><textarea id="pb-sport" placeholder="ex: marche quotidienne, vélo le week-end, natation 2x/semaine, MMA 4x/semaine + sparring...&#10;Si vous ne faites pas de sport, laissez vide ou indiquez 'aucune activité sportive'"></textarea></div>
+          <div class="g3" style="margin-top:12px;">
+            <div class="f"><label>Horaire habituel</label>
+              <select id="pb-horaire">
+                <option value="">Pas d'horaire fixe</option>
+                <option value="jeun">Matin à jeun (avant 8h)</option>
+                <option value="matin">Matin après petit-déj (8h–10h)</option>
+                <option value="midi">Midi (12h–14h)</option>
+                <option value="apm">Après-midi (14h–17h)</option>
+                <option value="soir">Soir (17h–20h)</option>
+                <option value="nuit">Nuit (après 20h)</option>
+              </select>
+            </div>
+            <div class="f"><label>Durée moyenne</label>
+              <select id="pb-duree"><option value="45">45 min</option><option value="60" selected>60 min</option><option value="75">75 min</option><option value="90">90 min</option><option value="120">2h+</option></select>
+            </div>
+            <div class="f"><label>Séances / semaine</label>
+              <select id="pb-seances"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select>
+            </div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Santé & bien-être</div>
+          <div class="g2">
+            <div class="f"><label>Problèmes de santé actuels</label><textarea id="pb-sante" placeholder="cholestérol, migraines, digestion, blessures..."></textarea></div>
+            <div class="f"><label>Traitements en cours</label><textarea id="pb-medocs" placeholder="médicament + dosage..."></textarea></div>
+          </div>
+          <div class="g2" style="margin-top:12px;">
+            <div class="f"><label>Durée de sommeil (h/nuit)</label><input type="number" id="pb-som" placeholder="7" step=".5"></div>
+            <div class="f"><label>Niveau de stress</label>
+              <select id="pb-stress"><option value="">—</option><option>Faible</option><option>Modéré</option><option>Élevé</option><option>Très élevé</option></select>
+            </div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Informations complémentaires</div>
+          <div class="f"><textarea id="pb-plus" style="min-height:75px;" placeholder="Contexte particulier, expériences passées, objectifs précis, compétition prévue..."></textarea></div>
+        </div>
+        <div class="note or"><b>Programme personnalisé</b> — généré selon votre profil, vos objectifs et vos horaires d'entraînement. Plan adapté et révisé au fil de votre suivi.</div>
+        <button class="btn-big" onclick="genPatPlan()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Générer mon programme
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /wrap patient -->
+</div><!-- /app-patient -->
+
+<!-- ─── ESPACE DIÉT ─── -->
+<div id="app-diet" style="display:none;">
+  <div class="tabs" id="tabs-diet">
+    <button class="tab on" onclick="dietNav(1)" id="dt-1">01 Identité</button>
+    <button class="tab" onclick="dietNav(2)" id="dt-2">02 Alimentation</button>
+    <button class="tab" onclick="dietNav(3)" id="dt-3">03 Santé</button>
+    <button class="tab" onclick="dietNav(4)" id="dt-4">04 Sport</button>
+    <button class="tab" onclick="dietNav(5)" id="dt-5">05 Objectif</button>
+    <button class="tab" onclick="dietNav(6)" id="dt-6">06 Holistique</button>
+    <button class="tab" onclick="dietNav(7)" id="dt-7">07 Génération</button>
+  </div>
+  <div class="wrap">
+    <div class="pills" id="diet-pills"></div>
+
+    <!-- S1 IDENTITÉ -->
+    <div class="qsec on" id="ds1">
+      <div class="ph"><div class="ph-ey">01 / 07</div><div class="ph-title">IDENTITÉ</div><div class="ph-sub">Informations personnelles et anthropométriques</div></div>
+      <div class="card">
+        <div class="fg"><div class="fg-lbl">Informations personnelles</div>
+          <div class="g3"><div class="f"><label>Nom *</label><input id="d-nom" placeholder="Mazouari"></div><div class="f"><label>Prénom *</label><input id="d-prenom" placeholder="Abderrahim"></div><div class="f"><label>Date de naissance *</label><input id="d-ddn" placeholder="15/03/1994" oninput="calcAgeDiet()"></div></div>
+          <div class="g3" style="margin-top:12px;"><div class="f"><label>Âge (calculé)</label><input id="d-age" readonly style="color:var(--v);cursor:default;"></div><div class="f"><label>Email</label><input id="d-email" placeholder="thomas@email.com"></div><div class="f"><label>Téléphone</label><input id="d-tel" placeholder="+33 6..."></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Discipline sportive</div>
+          <div class="rc-g" id="disc-rc">
+            <div class="rc" onclick="setRC(this,'discipline','mma')"><div class="rc-t">MMA</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','boxe')"><div class="rc-t">Boxe</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','muaythai')"><div class="rc-t">Muay Thaï</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','judo')"><div class="rc-t">Judo</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','bjj')"><div class="rc-t">BJJ / Grappling</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','lutte')"><div class="rc-t">Lutte</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','muscu')"><div class="rc-t">Musculation</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','cross')"><div class="rc-t">CrossFit</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','endurance')"><div class="rc-t">Endurance</div></div>
+            <div class="rc" onclick="setRC(this,'discipline','autre')"><div class="rc-t">Autre</div></div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Mesures corporelles</div>
+          <div class="g4"><div class="f"><label>Taille (cm) *</label><input type="number" id="d-taille" placeholder="173" oninput="calcIMC()"></div><div class="f"><label>Poids actuel (kg) *</label><input type="number" id="d-poids" placeholder="67" step=".1" oninput="calcIMC()"></div><div class="f"><label>Poids cible (kg)</label><input type="number" id="d-pcible" placeholder="62" step=".1"></div><div class="f"><label>IMC (calculé)</label><input id="d-imc" readonly style="color:var(--v);cursor:default;"></div></div>
+          <div class="g4" style="margin-top:10px;"><div class="f"><label>% masse grasse</label><input type="number" id="d-mg" placeholder="15" step=".1"></div><div class="f"><label>Masse maigre (kg)</label><input type="number" id="d-mm" placeholder="57" step=".1"></div><div class="f"><label>Tour de taille (cm)</label><input type="number" id="d-tt" placeholder="80"></div><div class="f"><label>Tour de hanche (cm)</label><input type="number" id="d-th" placeholder="95"></div></div>
+        </div>
+        <div class="fg" id="combat-dates" style="display:none;"><div class="fg-lbl">Phases de compétition</div>
+          <div class="g4"><div class="f"><label>Début phase 1</label><input id="d-ph1d" placeholder="14/05/2025"></div><div class="f"><label>Fin phase 1</label><input id="d-ph1f" placeholder="25/05/2025"></div><div class="f"><label>Début phase 2</label><input id="d-ph2d" placeholder="18/10/2025"></div><div class="f"><label>Fin phase 2</label><input id="d-ph2f" placeholder="28/10/2025"></div></div>
+          <div class="g3" style="margin-top:10px;"><div class="f"><label>Date de compétition</label><input id="d-datecomp" placeholder="09/11/2025"></div><div class="f"><label>Objectif de poids (kg)</label><input type="number" id="d-catpoids" placeholder="62" step=".5"></div><div class="f"><label>Type de coupure</label><select id="d-coupure"><option value="">—</option><option>Restriction calorique</option><option>Restriction hydrique (watercut)</option><option>Les deux</option></select></div></div>
+          <div class="f" style="margin-top:10px;"><label>Temps récupération post-pesée</label><select id="d-recup"><option value="">—</option><option value="lt2">Moins de 2h</option><option value="2a5">2–5h</option><option value="5a12">5–12h</option><option value="gt12">Plus de 12h (recommandé)</option><option value="jj">Pesée jour du combat</option></select></div>
+        </div>
+      </div>
+      <div class="btn-row"><button class="btn btn-v" onclick="dietNext(1)">Suivant →</button></div>
+    </div>
+
+    <!-- S2 ALIMENTATION -->
+    <div class="qsec" id="ds2">
+      <div class="ph"><div class="ph-ey">02 / 07</div><div class="ph-title">ALIMENTATION</div><div class="ph-sub">Habitudes, préférences et restrictions</div></div>
+      <div class="card">
+        <div class="fg"><div class="fg-lbl">Rythme alimentaire</div>
+          <div class="g3"><div class="f"><label>Repas / jour</label><select id="d-nrepas"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></div><div class="f"><label>Horaires habituels</label><input id="d-horaires" placeholder="7h30 / 12h / 16h / 20h"></div><div class="f"><label>Eau (L/jour hors entraînement)</label><input type="number" id="d-eau" placeholder="1.5" step=".5"></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Régime alimentaire</div>
+          <div class="tg-wrap" id="tg-regime"><div class="tg on" onclick="togTG(this,'regime')">Omnivore</div><div class="tg" onclick="togTG(this,'regime')">Végétarien</div><div class="tg" onclick="togTG(this,'regime')">Vegan</div><div class="tg" onclick="togTG(this,'regime')">Sans porc</div><div class="tg" onclick="togTG(this,'regime')">Ramadan</div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Préférences alimentaires</div>
+          <div class="g2"><div class="f"><label>Viandes préférées</label><textarea id="d-viandes" placeholder="poulet, dinde, bœuf, veau, agneau..."></textarea></div><div class="f"><label>Poissons préférés</label><textarea id="d-poissons" placeholder="saumon, thon, cabillaud, sardines..."></textarea></div></div>
+          <div class="g2" style="margin-top:10px;"><div class="f"><label>Aliments difficiles à éviter</label><textarea id="d-chouchou" placeholder="pain, fromage, dattes, chocolat..."></textarea></div><div class="f"><label>Aliments refusés / impossibles</label><textarea id="d-refus" placeholder="abats, poisson cru, fruits de mer..."></textarea></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Allergies confirmées</div>
+          <div class="tg-wrap" id="tg-allerg"><div class="tg" onclick="togTG(this,'allerg')">Gluten (cœliaque)</div><div class="tg" onclick="togTG(this,'allerg')">Lactose</div><div class="tg" onclick="togTG(this,'allerg')">Œufs</div><div class="tg" onclick="togTG(this,'allerg')">Arachides</div><div class="tg" onclick="togTG(this,'allerg')">Fruits à coque</div><div class="tg" onclick="togTG(this,'allerg')">Fruits de mer</div><div class="tg" onclick="togTG(this,'allerg')">Soja</div><div class="tg" onclick="togTG(this,'allerg')">Aucune</div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Journée alimentaire type</div><div class="f"><textarea id="d-routine" style="min-height:90px;" placeholder="7h30 : kéfir + dattes&#10;12h30 : poulet + riz + légumes&#10;16h : thon + fromage blanc&#10;19h30 : poulet + pâtes + légumes..."></textarea></div></div>
+      </div>
+      <div class="btn-row"><button class="btn btn-g" onclick="dietPrev(2)">← Retour</button><button class="btn btn-v" onclick="dietNext(2)">Suivant →</button></div>
+    </div>
+
+    <!-- S3 SANTÉ -->
+    <div class="qsec" id="ds3">
+      <div class="ph"><div class="ph-ey">03 / 07</div><div class="ph-title">SANTÉ</div><div class="ph-sub">Antécédents, pathologies, traitements</div></div>
+      <div class="card">
+        <div class="fg"><div class="fg-lbl">Pathologies actuelles</div>
+          <div class="tg-wrap" id="tg-patho"><div class="tg" onclick="togTG(this,'patho')">Diabète T2</div><div class="tg" onclick="togTG(this,'patho')">Insulinorésistance</div><div class="tg" onclick="togTG(this,'patho')">Hypercholestérolémie</div><div class="tg" onclick="togTG(this,'patho')">HTA</div><div class="tg" onclick="togTG(this,'patho')">Insuffisance rénale</div><div class="tg" onclick="togTG(this,'patho')">SII / Côlon irritable</div><div class="tg" onclick="togTG(this,'patho')">Reflux / RGO</div><div class="tg" onclick="togTG(this,'patho')">Hypothyroïdie</div><div class="tg" onclick="togTG(this,'patho')">Anémie / carence fer</div><div class="tg" onclick="togTG(this,'patho')">Carence vit. D</div><div class="tg" onclick="togTG(this,'patho')">Aucune</div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Traitements & antécédents</div>
+          <div class="g2"><div class="f"><label>Médicaments en cours + dosages</label><textarea id="d-medocs" placeholder="metformine 1g, levothyrox 50µg..."></textarea></div><div class="f"><label>Compléments déjà pris</label><textarea id="d-compact" placeholder="oméga-3, carnitine, créatine..."></textarea></div></div>
+          <div class="g2" style="margin-top:10px;"><div class="f"><label>Blessures / chirurgies</label><textarea id="d-bless" placeholder="genou 2021, hernie discale..."></textarea></div><div class="f"><label>Prédispositions génétiques</label><textarea id="d-gene" placeholder="diabète T2, maladies cardio..."></textarea></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Sommeil & bien-être</div>
+          <div class="g3"><div class="f"><label>Durée sommeil (h/nuit)</label><input type="number" id="d-somh" placeholder="7" step=".5"></div><div class="f"><label>Qualité</label><select id="d-somq"><option value="">—</option><option>Bon, régulier</option><option>Irrégulier</option><option>Difficultés endormissement</option><option>Réveils nocturnes</option><option>Insomnie chronique</option></select></div><div class="f"><label>Stress & alimentation</label><select id="d-stress"><option value="">—</option><option>Pas d'impact</option><option>Grignotage sous stress</option><option>Perd l'appétit</option></select></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Valeurs biologiques (si disponibles)</div>
+          <div class="g4"><div class="f"><label>Glycémie à jeun (g/L)</label><input type="number" id="d-glyc" placeholder="0.95" step=".01"></div><div class="f"><label>HbA1c (%)</label><input type="number" id="d-hba1c" placeholder="5.2" step=".1"></div><div class="f"><label>Vit. D (ng/mL)</label><input type="number" id="d-vitd" placeholder="28"></div><div class="f"><label>Ferritine (ng/mL)</label><input type="number" id="d-ferr" placeholder="45"></div></div>
+        </div>
+      </div>
+      <div class="btn-row"><button class="btn btn-g" onclick="dietPrev(3)">← Retour</button><button class="btn btn-v" onclick="dietNext(3)">Suivant →</button></div>
+    </div>
+
+    <!-- S4 SPORT -->
+    <div class="qsec" id="ds4">
+      <div class="ph"><div class="ph-ey">04 / 07</div><div class="ph-title">SPORT</div><div class="ph-sub">Pratique, volume, intensité et timing nutritionnel</div></div>
+      <div class="card">
+        <div class="fg"><div class="fg-lbl">Volume d'entraînement</div>
+          <div class="g4"><div class="f"><label>Séances / semaine</label><select id="d-seances"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>2×/jour</option></select></div><div class="f"><label>Durée moyenne</label><select id="d-duree"><option>30 min</option><option>45 min</option><option selected>60 min</option><option>75 min</option><option>90 min</option><option>2h+</option></select></div><div class="f"><label>Intensité dominante</label><select id="d-intensite"><option>Légère</option><option selected>Modérée</option><option>Élevée</option><option>Très élevée</option></select></div><div class="f"><label>Horaire habituel</label><select id="d-horseance"><option value="">—</option><option value="jeun">Matin à jeun</option><option value="matin">Matin après PDJ</option><option value="midi">Midi</option><option value="apm">Après-midi</option><option value="soir">Soir</option><option value="nuit">Nuit</option></select></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Période sportive</div>
+          <div class="rc-g" id="periode-rc">
+            <div class="rc on" onclick="setRC(this,'periode','prep_gen')"><div class="rc-t">Préparation générale</div><div class="rc-s">Off-season</div></div>
+            <div class="rc" onclick="setRC(this,'periode','prep_spec')"><div class="rc-t">Préparation spécifique</div><div class="rc-s">Pré-compétition</div></div>
+            <div class="rc" onclick="setRC(this,'periode','camp')"><div class="rc-t">Camp</div><div class="rc-s">4–8 semaines avant</div></div>
+            <div class="rc" onclick="setRC(this,'periode','pesee')"><div class="rc-t">Phase pesée</div><div class="rc-s">Dernières 2 semaines</div></div>
+            <div class="rc" onclick="setRC(this,'periode','comp')"><div class="rc-t">Compétition</div><div class="rc-s">Semaine J</div></div>
+            <div class="rc" onclick="setRC(this,'periode','repos')"><div class="rc-t">Repos / transition</div><div class="rc-s">Post-saison</div></div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Activités secondaires</div><div class="f"><input id="d-secact" placeholder="marche, vélo loisir, natation..."></div></div>
+      </div>
+      <div class="btn-row"><button class="btn btn-g" onclick="dietPrev(4)">← Retour</button><button class="btn btn-v" onclick="dietNext(4)">Suivant →</button></div>
+    </div>
+
+    <!-- S5 OBJECTIF -->
+    <div class="qsec" id="ds5">
+      <div class="ph"><div class="ph-ey">05 / 07</div><div class="ph-title">OBJECTIF</div><div class="ph-sub">Méthode de calcul et objectif précis</div></div>
+      <div class="card">
+        <div class="fg"><div class="fg-lbl">Objectif nutritionnel *</div>
+          <div class="rc-g" id="obj-rc">
+            <div class="rc" onclick="setRC(this,'objectif','seche')"><div class="rc-t">Perte de poids</div><div class="rc-s">Déficit modéré — préservation musculaire</div></div>
+            <div class="rc" onclick="setRC(this,'objectif','pesee')"><div class="rc-t">Pesée / Coupure combat</div><div class="rc-s">Protocole sport à catégories de poids</div></div>
+            <div class="rc on" onclick="setRC(this,'objectif','reequil')"><div class="rc-t">Maintien / Rééquilibrage</div><div class="rc-s">Stabilisation, amélioration des habitudes</div></div>
+            <div class="rc" onclick="setRC(this,'objectif','masse')"><div class="rc-t">Prise de masse propre</div><div class="rc-s">Surplus contrôlé — qualité musculaire</div></div>
+            <div class="rc" onclick="setRC(this,'objectif','perf')"><div class="rc-t">Performance sportive</div><div class="rc-s">Optimisation énergie et récupération</div></div>
+            <div class="rc" onclick="setRC(this,'objectif','sante')"><div class="rc-t">Santé / Pathologie</div><div class="rc-s">Adaptation clinique personnalisée</div></div>
+            <div class="rc" onclick="setRC(this,'objectif','seche_acc')"><div class="rc-t">Perte de poids accélérée</div><div class="rc-s">Déficit élevé — suivi rapproché</div></div>
+            <div class="rc" onclick="setRC(this,'objectif','masse_grand')"><div class="rc-t">Grande prise de masse</div><div class="rc-s">Surplus important — volume maximal</div></div>
+          </div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Précisions</div>
+          <div class="g3"><div class="f"><label>Nombre de repas souhaité</label><select id="d-nrepas2"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></div><div class="f"><label>Délai souhaité</label><select id="d-delai"><option value="">—</option><option>1 mois</option><option>2 mois</option><option>3 mois</option><option>6 mois</option></select></div><div class="f"><label>Objectif formulé par le patient</label></div></div>
+          <div class="f" style="margin-top:8px;"><textarea id="d-objperso" placeholder="ex: retrouver mon poids de forme avant ma compétition en juin, améliorer mon énergie..."></textarea></div>
+        </div>
+      </div>
+      <div class="btn-row"><button class="btn btn-g" onclick="dietPrev(5)">← Retour</button><button class="btn btn-v" onclick="dietNext(5)">Suivant →</button></div>
+    </div>
+
+    <!-- S6 HOLISTIQUE -->
+    <div class="qsec" id="ds6">
+      <div class="ph"><div class="ph-ey">06 / 07</div><div class="ph-title">HOLISTIQUE</div><div class="ph-sub">Médecine de la Sunnah · Naturopathie · Médecine chinoise</div></div>
+      <div class="card">
+        <div class="fg"><div class="fg-lbl">🌙 Sunnah & médecine prophétique</div>
+          <div class="g2"><div class="f"><label>Nigelle (Habba Sawda)</label><select id="d-nigelle"><option value="">—</option><option>Oui, régulièrement</option><option>Occasionnellement</option><option>Non</option></select></div><div class="f"><label>Miel (type)</label><input id="d-miel" placeholder="sidr, Manuka, brut local..."></div></div>
+          <div class="g2" style="margin-top:10px;"><div class="f"><label>Vinaigre de cidre</label><select id="d-vinaigre"><option value="">—</option><option>Quotidien</option><option>Occasionnellement</option><option>Non</option></select></div><div class="f"><label>Jeûnes volontaires</label><select id="d-jeunevol"><option value="">—</option><option>Réguliers (lun/jeu)</option><option>Occasionnels</option><option>Non</option></select></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">🌿 Naturopathie</div>
+          <div class="g2"><div class="f"><label>Plantes adaptogènes</label>
+            <div class="tg-wrap" style="margin-top:4px;"><div class="tg" onclick="togTG(this,'adapt')">Ashwagandha</div><div class="tg" onclick="togTG(this,'adapt')">Rhodiola</div><div class="tg" onclick="togTG(this,'adapt')">Ginseng</div><div class="tg" onclick="togTG(this,'adapt')">Maca</div><div class="tg" onclick="togTG(this,'adapt')">Reishi</div><div class="tg" onclick="togTG(this,'adapt')">Aucune</div></div>
+          </div><div class="f"><label>Jeûne intermittent</label><select id="d-ji"><option value="">—</option><option>16/8 régulier</option><option>20/4</option><option>OMAD</option><option>Non</option></select></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">☯ MTC</div>
+          <div class="g2"><div class="f"><label>Syndrome énergétique</label><select id="d-mtc"><option value="">—</option><option>Vide de Qi</option><option>Vide de Yang</option><option>Vide de Yin</option><option>Stase de Qi</option><option>Humidité-Glaires</option><option>Chaleur-Feu</option><option>Non connu</option></select></div><div class="f"><label>Notes MTC</label><textarea id="d-mtcnotes" placeholder="Observations cliniques MTC..."></textarea></div></div>
+        </div>
+        <div class="fg"><div class="fg-lbl">Compléments prioritaires</div>
+          <div class="tg-wrap" id="tg-comp">
+            <div class="tg" onclick="togTG(this,'comp')">Multivitamines</div>
+            <div class="tg" onclick="togTG(this,'comp')">Oméga-3</div>
+            <div class="tg" onclick="togTG(this,'comp')">Magnésium bisglycinate</div>
+            <div class="tg" onclick="togTG(this,'comp')">Créatine Creapure®</div>
+            <div class="tg" onclick="togTG(this,'comp')">Carnitine</div>
+            <div class="tg" onclick="togTG(this,'comp')">Glycine</div>
+            <div class="tg" onclick="togTG(this,'comp')">BCAA électrolytes</div>
+            <div class="tg" onclick="togTG(this,'comp')">Citrulline malate</div>
+            <div class="tg" onclick="togTG(this,'comp')">Bêta-alanine</div>
+            <div class="tg" onclick="togTG(this,'comp')">Vit. D3 + K2</div>
+            <div class="tg" onclick="togTG(this,'comp')">Zinc + B6</div>
+            <div class="tg" onclick="togTG(this,'comp')">Probiotiques</div>
+            <div class="tg" onclick="togTG(this,'comp')">Collagène marin</div>
+            <div class="tg" onclick="togTG(this,'comp')">Nigelle</div>
+          </div>
+          <div class="f" style="margin-top:12px;"><label>Posologie spécifique à indiquer</label><textarea id="d-comp-notes" placeholder="ex: Carnitine 3 à 4 gélules/jour · Glycine 10g/jour · Oméga-3 : 3 le matin..."></textarea></div>
+        </div>
+      </div>
+      <div class="btn-row"><button class="btn btn-g" onclick="dietPrev(6)">← Retour</button><button class="btn btn-v" onclick="dietNext(6)">Suivant →</button></div>
+    </div>
+
+    <!-- S7 GÉNÉRATION -->
+    <div class="qsec" id="ds7">
+      <div class="ph"><div class="ph-ey">07 / 07</div><div class="ph-title">GÉNÉRATION</div><div class="ph-sub">Validation et génération du programme complet</div></div>
+      <div id="diet-recap" class="card"></div>
+      <div class="card" style="margin-top:14px;">
+        <div class="fg-lbl" style="margin-bottom:12px;">Notes cliniques</div>
+        <div class="f"><textarea id="d-notes" style="min-height:80px;" placeholder="Observations, éléments de contexte importants, ajustements spécifiques..."></textarea></div>
+      </div>
+      <button class="btn-big" onclick="genDietPlan()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        GÉNÉRER LE PROGRAMME COMPLET
+      </button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="ldg" id="ldg">
+      <div><div style="font-family:var(--fh);font-size:30px;letter-spacing:2px;margin-bottom:8px;">GÉNÉRATION EN COURS</div><div style="font-family:var(--fm);font-size:11px;color:var(--n5);">Méthode Antoine Wu — Programme personnalisé</div></div>
+      <div class="ldg-bar-wrap"><div class="ldg-bar" id="ldg-bar"></div></div>
+      <div class="ldg-step" id="ldg-step">Analyse du profil...</div>
+    </div>
+
+    <!-- PLAN RESULT -->
+    <div class="plan-wrap" id="plan-wrap">
+      <div class="plan-actions">
+        <button class="pa pa-v" onclick="window.print()">🖨 Imprimer / PDF</button>
+        <button class="pa pa-g" onclick="nouveauPlan()">+ Nouveau bilan</button>
+      </div>
+      <div id="plan-content"></div>
+    </div>
+
+  </div><!-- /wrap diet -->
+</div><!-- /app-diet -->
+
+<script>
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+var S = {
+  mode:'patient', // patient | diet
+  objectif:'reequil', discipline:'', periode:'prep_gen',
+  patObj:'reequil',
+  suivi_hist: [],
+};
+try { S.suivi_hist = JSON.parse(localStorage.getItem('lifteat_sv')||'[]'); } catch(e){}
+
+var NP_DATA = [
+  {nom:"Créatine Creapure®",dose:"3–5g/jour post-entraînement",desc:"Creapure® allemande. La plus pure au monde. Testée anti-dopage (Cologne List). Gélules végétales.",url:"https://www.nutripure.fr/fr/musculation/16-creatine-monohydrate-creapure.html",cat:"performance"},
+  {nom:"Oméga 3 EPAX®",dose:"2–3 gélules/jour avec repas",desc:"420mg EPA + 300mg DHA par gélule. Huile de poisson sauvage EPAX. Fabriqué en France.",url:"https://www.nutripure.fr/fr/sante/15-omega-3-epax.html",cat:"sante"},
+  {nom:"Magnésium Bisglycinate + B6",dose:"2 gélules/soir avant coucher",desc:"Haute absorption, sans effet laxatif. Taurine + B6 en synergie. Sommeil et récupération.",url:"https://www.nutripure.fr/fr/sante/18-magnesium-bisglycinate.html",cat:"sante"},
+  {nom:"Whey Isolate Native",dose:"25–30g dans 200ml eau post-effort",desc:"94% protéines. Sans lécithine de soja ni arômes artificiels. Très digeste.",url:"https://www.nutripure.fr/fr/musculation/17-whey-isolate-native.html",cat:"performance"},
+  {nom:"Multivitamines",dose:"2 gélules/jour avec repas",desc:"Spectre complet, sans stéarate de magnésium ni dioxyde de titane.",url:"https://www.nutripure.fr/fr/sante/multivitamines.html",cat:"sante"},
+  {nom:"Probiotiques Pure Bio²",dose:"1 gélule/jour à jeun",desc:"10 milliards de bactéries, 5 souches. Microbiote, immunité, digestion.",url:"https://www.nutripure.fr/fr/sante/probiotiques-pure-bio.html",cat:"sante"},
+  {nom:"Active Curcumine",dose:"2 gélules/jour avec repas gras",desc:"Haute biodisponibilité + pipérine. Anti-inflammatoire naturel, articulations.",url:"https://www.nutripure.fr/fr/sante/active-curcumine.html",cat:"sante"},
+  {nom:"L-Citrulline",dose:"6–8g 45min avant l\'entraînement",desc:"Endurance musculaire, réduction courbatures, pompe vasculaire.",url:"https://www.nutripure.fr/fr/musculation/l-citrulline.html",cat:"performance"},
+  {nom:"BCAA 2.1.1",dose:"5g avant ou pendant la séance",desc:"Pur, sans édulcorant. Anti-catabolisme et synthèse protéique.",url:"https://www.nutripure.fr/fr/musculation/bcaa-2-1-1.html",cat:"performance"},
+  {nom:"Électrolytes",dose:"1 pastille dans 500ml eau pendant effort",desc:"Sodium, potassium, magnésium, calcium. Pertes minérales compensées.",url:"https://www.nutripure.fr/fr/musculation/electrolytes.html",cat:"performance"},
+  {nom:"L-Glutamine",dose:"5g post-entraînement ou avant coucher",desc:"Récupération musculaire et intestinale. Immunité sous stress physique intense.",url:"https://www.nutripure.fr/fr/musculation/l-glutamine.html",cat:"recuperation"},
+  {nom:"Collagène Marin",dose:"10g/jour à diluer",desc:"Peptides de collagène + vitamine C naturelle. Articulations, peau, tendons.",url:"https://www.nutripure.fr/fr/sante/collagene-marin.html",cat:"recuperation"},
+  {nom:"Pure Recovery",dose:"1 dose dans 400ml eau post-effort",desc:"Complexe récupération : glucides + protéines + électrolytes.",url:"https://www.nutripure.fr/fr/musculation/pure-recovery.html",cat:"recuperation"},
+  {nom:"L-Carnitine Carnipure®",dose:"1–2g avant l\'entraînement",desc:"Carnipure® certifiée. Oxydation des graisses, énergie, récupération en sèche.",url:"https://www.nutripure.fr/fr/musculation/l-carnitine-carnipure.html",cat:"seche"},
+  {nom:"Fenugrec",dose:"2–3 gélules/jour avec repas",desc:"Testostérone naturelle, sensibilité à l\'insuline. Plante documentée scientifiquement.",url:"https://www.nutripure.fr/fr/sante/fenugrec.html",cat:"sante"},
+  {nom:"Pure Gainer",dose:"1 dose (~100g) dans 400ml lait ou eau",desc:"Prise de masse propre. Glucides complexes + whey isolate native. Sans sucres ajoutés.",url:"https://www.nutripure.fr/fr/musculation/pure-gainer.html",cat:"masse"},
+];
+
+// ══════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════
+var _AH = 'becdc22561dfaae4ca7f9bc66164a5bbb6b6b4d9e1e2e05301198d68372fc5c1';
+
+function toggleMode() {
+  if (S.mode === 'diet') {
+    showPatient();
+  } else {
+    if (sessionStorage.getItem('_lk') === _AH) showDiet();
+    else document.getElementById('login-overlay').classList.remove('h');
+    setTimeout(function(){ document.getElementById('login-pwd').focus(); }, 100);
+  }
+}
+
+function doLogin() {
+  var p = document.getElementById('login-pwd').value;
+  crypto.subtle.digest('SHA-256', new TextEncoder().encode(p)).then(function(buf){
+    var h = Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+    if (h === _AH) {
+      sessionStorage.setItem('_lk', _AH);
+      document.getElementById('login-overlay').classList.add('h');
+      document.getElementById('login-pwd').value = '';
+      document.getElementById('login-err').style.display = 'none';
+      showDiet();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+      document.getElementById('login-pwd').value = '';
+    }
+  });
+}
+
+function cancelLogin() {
+  document.getElementById('login-overlay').classList.add('h');
+  document.getElementById('login-pwd').value = '';
+  document.getElementById('login-err').style.display = 'none';
+}
+
+function showPatient() {
+  S.mode = 'patient';
+  document.getElementById('app-patient').style.display = 'block';
+  document.getElementById('app-diet').style.display = 'none';
+  document.getElementById('btn-mode').textContent = '⚕ Mode diét';
+  document.getElementById('btn-mode').className = 'mode-btn mode-btn-diet';
+  window.scrollTo(0, 0);
+}
+
+function showDiet() {
+  S.mode = 'diet';
+  document.getElementById('app-patient').style.display = 'none';
+  document.getElementById('app-diet').style.display = 'block';
+  document.getElementById('btn-mode').textContent = '◉ Vue patient';
+  document.getElementById('btn-mode').className = 'mode-btn mode-btn-pat';
+  initDietPills();
+  window.scrollTo(0, 0);
+}
+
+// ══════════════════════════════════════════
+// PATIENT NAV
+// ══════════════════════════════════════════
+function patNav(v) {
+  ['programme','conseils','complements','suivi','bilan'].forEach(function(x){
+    document.getElementById('pv-'+x).classList.remove('on');
+    document.getElementById('pnt-'+x).classList.remove('on');
+  });
+  document.getElementById('pv-'+v).classList.add('on');
+  document.getElementById('pnt-'+v).classList.add('on');
+  if (v === 'suivi') initSuivi();
+  if (v === 'complements') renderNP('all');
+  window.scrollTo(0, 0);
+}
+
+// ══════════════════════════════════════════
+// CALCULS — MÉTHODE ANTOINE WU
+// ══════════════════════════════════════════
+// ── Méthode Antoine Wu — Paliers caloriques ──
+// Sèche : 28 kcal/kg · 2g prot · 3g gluc · 1g lip (masterclass + programme Abderrahim)
+// Sèche accélérée : 24 kcal/kg · 2.2g prot · 2g gluc · 0.8g lip
+// Maintien / Rééquilibrage : 35 kcal/kg
+// Prise de masse propre : 40 kcal/kg · surplus contrôlé
+// Grande prise de masse : 44 kcal/kg · surplus important
+// Pesée combat : 28 kcal/kg protocole spécifique
+// Santé / Pathologie : 35 kcal/kg avec adaptations cliniques
+// ANC protéines min : 0.83g/kg/j (masterclass) — sportifs : 1.8–2.2g/kg
+
+function kcalKg(obj) {
+  // Paliers de base — méthode Antoine Wu
+  var map = {
+    seche: 28, seche_acc: 24, pesee: 28, digestion: 30,
+    reequil: 35, sante: 35,
+    masse: 40, perf: 40, masse_grand: 44
+  };
+  return map[obj] || 35;
+}
+
+// Différenciation calorique par type de journée (indépendant de l\'objectif)
+// Jour actif (entraînement lourd/sparring) : +2 kcal/kg
+// Jour moyen actif (technique/cardio léger) : base
+// Jour de repos : -2 kcal/kg
+function kcalParJour(obj, typeJour) {
+  var base = kcalKg(obj);
+  // Pour les objectifs de perte, on applique un delta plus prudent
+  var isPerte = (obj === 'seche' || obj === 'seche_acc' || obj === 'pesee');
+  if (typeJour === 'lourd') return base + (isPerte ? 2 : 2);   // jour actif
+  if (typeJour === 'repos') return base - (isPerte ? 2 : 2);   // jour repos
+  return base; // jour moyen actif
+}
+
+function calcMacros(poids, obj, typeJour) {
+  typeJour = typeJour || 'leger'; // jour moyen actif par défaut
+  var kk = kcalParJour(obj, typeJour);
+  var kcal = Math.round(poids * kk);
+  var prot, gluc, lip;
+
+  if (obj === 'seche' || obj === 'pesee') {
+    // Antoine Wu : 28 kcal/kg · 2g/kg prot · 3g/kg gluc · 1g/kg lip
+    prot = Math.round(poids * 2);
+    gluc = Math.round(poids * 3);
+    lip  = Math.round(poids * 1);
+  } else if (obj === 'seche_acc') {
+    // Sèche accélérée : déficit élevé, protéines augmentées pour protéger la masse maigre
+    prot = Math.round(poids * 2.2);
+    gluc = Math.round(poids * 2);
+    lip  = Math.round(poids * 0.8);
+  } else if (obj === 'masse') {
+    // Prise de masse propre : surplus modéré 40 kcal/kg
+    prot = Math.round(poids * 2.2);
+    gluc = Math.round(poids * 4.5);
+    lip  = Math.max(Math.round((kcal - prot*4 - gluc*4)/9), 35);
+  } else if (obj === 'masse_grand') {
+    // Grande prise de masse : surplus élevé 44 kcal/kg
+    prot = Math.round(poids * 2.4);
+    gluc = Math.round(poids * 5.5);
+    lip  = Math.max(Math.round((kcal - prot*4 - gluc*4)/9), 40);
+  } else if (obj === 'perf') {
+    // Performance : priorité glucides et protéines
+    prot = Math.round(poids * 2.0);
+    gluc = Math.round(poids * 5.0);
+    lip  = Math.max(Math.round((kcal - prot*4 - gluc*4)/9), 35);
+  } else {
+    // Maintien / Rééquilibrage / Santé : 35 kcal/kg
+    // ANC : protéines 0.83g/kg min — sportifs 1.6-1.8g/kg
+    prot = Math.round(poids * 1.8);
+    gluc = Math.round(poids * 3.5);
+    lip  = Math.max(Math.round((kcal - prot*4 - gluc*4)/9), 35);
+  }
+
+  // Recalcul des kcal réelles à partir des macros
+  var kcalReel = Math.round(prot*4 + gluc*4 + lip*9);
+  return {
+    kcal: kcalReel, prot: prot, gluc: gluc, lip: lip,
+    protKg: (prot/poids).toFixed(1),
+    glucKg: (gluc/poids).toFixed(1)
+  };
+}
+
+function glucJour(poids, obj, type) {
+  // Cyclage glucidique par type de journée selon objectif
+  var map = {
+    seche:     { lourd: Math.round(poids*3.5), leger: Math.round(poids*3),   repos: Math.round(poids*2) },
+    seche_acc: { lourd: Math.round(poids*2.5), leger: Math.round(poids*2),   repos: Math.round(poids*1) },
+    pesee:     { lourd: Math.round(poids*3.5), leger: Math.round(poids*3),   repos: Math.round(poids*2) },
+    reequil:   { lourd: Math.round(poids*4),   leger: Math.round(poids*3.5), repos: Math.round(poids*2) },
+    sante:     { lourd: Math.round(poids*4),   leger: Math.round(poids*3.5), repos: Math.round(poids*2) },
+    masse:     { lourd: Math.round(poids*5),   leger: Math.round(poids*4),   repos: Math.round(poids*2.5) },
+    masse_grand:{ lourd:Math.round(poids*6),   leger: Math.round(poids*5),   repos: Math.round(poids*3) },
+    perf:      { lourd: Math.round(poids*5.5), leger: Math.round(poids*4.5), repos: Math.round(poids*2.5) },
+    digestion: { lourd: Math.round(poids*3),   leger: Math.round(poids*2.5), repos: Math.round(poids*2) },
+  };
+  return (map[obj] || map.reequil)[type];
+}
+
+// ══════════════════════════════════════════
+// CONSTRUCTION DES REPAS
+// ══════════════════════════════════════════
+var PROT = [
+  {nom:"Blanc de poulet",cru:100,cuit:85,prot:23},
+  {nom:"Dinde (escalope)",cru:100,cuit:85,prot:22},
+  {nom:"Bœuf haché 5% MG",cru:100,cuit:80,prot:21},
+  {nom:"Veau (escalope)",cru:100,cuit:82,prot:22},
+  {nom:"Agneau (gigot maigre)",cru:100,cuit:75,prot:20},
+  {nom:"Saumon",cru:100,cuit:85,prot:20},
+  {nom:"Cabillaud",cru:120,cuit:100,prot:20},
+  {nom:"Thon conserve nature",cru:85,cuit:85,prot:20},
+  {nom:"Sardines conserve",cru:100,cuit:100,prot:20},
+  {nom:"Maquereau",cru:100,cuit:85,prot:19},
+];
+var GLUC_LENTS = [
+  {nom:"Riz basmati",cru:60,cuit:180,g:50,note:"60g cru = 180g cuit (×3)"},
+  {nom:"Patate douce",cru:150,cuit:130,g:30,note:"peser crue"},
+  {nom:"Flocons d\'avoine",cru:60,cuit:0,g:40,note:"peser sec"},
+  {nom:"Quinoa",cru:70,cuit:200,g:44,note:"70g cru = 200g cuit (×2.8)"},
+  {nom:"Pâtes complètes",cru:70,cuit:175,g:48,note:"70g cru = 175g cuit (×2.5) — al dente"},
+  {nom:"Lentilles vertes",cru:70,cuit:200,g:40,note:"IG très bas"},
+  {nom:"Pois chiches",cru:70,cuit:200,g:44,note:"IG bas"},
+];
+var GLUC_RAPIDES = [
+  {nom:"Riz blanc cuit",cru:60,cuit:180,g:52,note:"post-effort uniquement"},
+  {nom:"Banane mûre",g:27,note:"1 banane = 27g gluc"},
+  {nom:"Dattes Medjool",g:18,note:"3 dattes = 18g gluc — pré-effort"},
+  {nom:"Jus de raisins",g:15,note:"25cl dilué dans 75cl eau + pincée sel — pré-entraînement"},
+];
+
+function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+function buildAlimLine(alim, color) {
+  var qty = alim.cru ? alim.cru+'g cru' : (alim.cuit ? alim.cuit+'g cuit' : '');
+  var note = alim.note || '';
+  return '<div class="a-row">'
+    + '<div class="a-dot" style="background:'+color+'"></div>'
+    + '<div class="a-info">'
+    + '<div class="a-nom">'+alim.nom+'</div>'
+    + (qty ? '<div class="a-qty">'+qty+'</div>' : '')
+    + (note ? '<div class="a-note">'+note+'</div>' : '')
+    + '</div></div>';
+}
+
+function buildRepasHTML(nom, heure, p, g, l, obj, horaire, isOff, discipline) {
+  var nl = nom.toLowerCase();
+  var isPost = nl.includes('post') || nl.includes('fenêtre') || nl.includes('récup');
+  var isPre = nl.includes('pré') || nl.includes('avant') || nl.includes('entraîn');
+  var isDej = nl.includes('déj');
+  var isPDJ = nl.includes('petit');
+  var isDin = nl.includes('dîner') || nl.includes('soir');
+  var isColl = nl.includes('collation') || nl.includes('16h');
+  var kcal = Math.round(p*4+g*4+l*9);
+
+  var html = '<div class="repas-bloc">'
+    + '<div class="rh"><div class="rh-l">'
+    + '<span class="r-time">'+heure+'</span>'
+    + '<span class="r-nom">'+nom+'</span>'
+    + '</div>'
+    + '<div>'
+    + '<div class="r-mac">~'+kcal+' kcal</div>'
+    + '<div style="display:flex;gap:6px;margin-top:3px;">'
+    + '<span style="font-family:var(--fm);font-size:10px;background:rgba(26,92,158,.12);color:var(--bl);padding:1px 7px;border-radius:4px;">P '+Math.round(p)+'g</span>'
+    + '<span style="font-family:var(--fm);font-size:10px;background:rgba(184,134,11,.12);color:var(--or);padding:1px 7px;border-radius:4px;">G '+Math.round(g)+'g</span>'
+    + '<span style="font-family:var(--fm);font-size:10px;background:rgba(92,63,160,.12);color:var(--vio);padding:1px 7px;border-radius:4px;">L '+Math.round(l)+'g</span>'
+    + '</div></div></div>'
+    + '<div class="r-body">';
+
+  if (isPDJ) {
+    // Petit-déjeuner
+    var laitier = p > 10 ? pick([
+      {nom:"Kéfir nature",cru:0,cuit:0,prot:Math.round(p*0.6),note:"200ml"},
+      {nom:"Fromage blanc 0%",cru:0,cuit:0,prot:Math.round(p*0.8),note:Math.round(p*12)+"g"},
+      {nom:"Skyr nature",cru:0,cuit:0,prot:Math.round(p*0.9),note:Math.round(p*8)+"g"},
+    ]) : null;
+    var oeuf = {nom:"Œuf entier BIO",cru:0,cuit:0,prot:7,note:"1 œuf = 6–7g prot · peser cuit"};
+    var glucPDJ = g > 5 ? pick([
+      {nom:"Flocons d\'avoine",cru:Math.round(g*1.5),cuit:0,g:g,note:Math.round(g*1.5)+"g sec"},
+      {nom:"Dattes (Deglet Nour ou Medjool)",g:g,note:g>20?"5 dattes Deglet ou 4 Medjool":"3 dattes — énergie naturelle"},
+    ]) : null;
+
+    html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--bl);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;">Protéines <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+    if (laitier) html += buildAlimLine(laitier, '#1a5c9e');
+    html += buildAlimLine(oeuf, '#1a5c9e');
+    if (g > 5 && glucPDJ) {
+      html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--or);letter-spacing:.07em;text-transform:uppercase;margin:10px 0 8px;display:flex;align-items:center;gap:6px;">Glucides <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+      html += buildAlimLine(glucPDJ, '#b8860b');
+      if (isOff) html += '<div style="font-family:var(--fm);font-size:10px;color:var(--rouge);background:rgba(192,57,43,.06);border-radius:4px;padding:4px 10px;margin-top:6px;display:inline-block;">✗ SAUTER les glucides en jour de repos si tu ne t\'entraînes pas le matin</div>';
+    }
+    if (l > 3) {
+      html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--vio);letter-spacing:.07em;text-transform:uppercase;margin:10px 0 8px;display:flex;align-items:center;gap:6px;">Lipides <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+      html += buildAlimLine({nom:"Graines de chia",g:l,note:Math.round(l*0.8)+"g (10g = 5g lipides)"}, '#5c3fa0');
+    }
+    html += '<div style="margin-top:10px;font-family:var(--fm);font-size:10px;color:var(--v);">→ Prendre oméga-3 + carnitine avec ce repas</div>';
+  } else if (isPre || (nom.includes('entraîn'))) {
+    // Avant entraînement
+    html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--bl);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;">Pré-entraînement <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+    html += buildAlimLine({nom:"Jus de raisins",g:Math.round(g*0.5),note:"25cl dilué dans 75cl eau + pincée sel de Guérande"}, '#b8860b');
+    html += buildAlimLine({nom:"BCAA électrolytes",g:0,note:"10g — pendant l\'effort"}, '#1a5c9e');
+    html += buildAlimLine({nom:"Bonbon (glucides rapides)",g:Math.round(g*0.5),note:"20g de ton choix — pic glycémique court"}, '#b8860b');
+  } else if (isPost) {
+    // Post-effort fenêtre anabolique
+    html += '<div style="font-family:var(--fm);font-size:10px;color:var(--v);background:rgba(42,122,75,.08);border-radius:6px;padding:8px 12px;margin-bottom:10px;">⚡ Fenêtre anabolique — consommer dans les 30 min post-effort</div>';
+    html += buildAlimLine({nom:"Fromage blanc 0%",cru:0,cuit:0,prot:Math.round(p*0.7),note:"200g = 16g prot"}, '#1a5c9e');
+    if (g > 10) html += buildAlimLine({nom:"Riz blanc cuit OU banane",g:g,note:Math.round(g*3.6)+"g cuit ou 1 banane — glucides rapides"}, '#b8860b');
+  } else if (isColl) {
+    // Collation 16h
+    var protColl = pick([
+      {nom:"Thon émietté conserve",cru:70,cuit:70,prot:17,note:"70g égouttés"},
+      {nom:"Sardines conserve",cru:70,cuit:70,prot:14,note:"70g égouttées"},
+    ]);
+    html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--bl);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;">Protéines <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+    html += buildAlimLine(protColl, '#1a5c9e');
+    html += buildAlimLine({nom:"Fromage blanc 0%",cru:100,cuit:100,prot:8,note:"100g"}, '#1a5c9e');
+    html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--v);letter-spacing:.07em;text-transform:uppercase;margin:10px 0 8px;display:flex;align-items:center;gap:6px;">Légumes <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+    html += buildAlimLine({nom:"Tomate + ½ concombre + salade verte",g:0,note:"Légumes à volonté — fibres et micronutriments"}, '#2a7a4b');
+    html += '<div style="font-family:var(--fm);font-size:10px;color:var(--n5);margin-top:6px;">Pas de lipides ajoutés · Pas de féculents</div>';
+  } else {
+    // Déjeuner ou dîner standard
+    var isFish = obj==='seche' || obj==='pesee';
+    var protSrc = isFish && Math.random()>0.5
+      ? pick([PROT[5],PROT[6],PROT[7],PROT[8]])
+      : pick([PROT[0],PROT[1],PROT[2],PROT[3],PROT[4]]);
+    var nb_prot = Math.round(p / (protSrc.prot/100));
+    var glucSrc = isOff
+      ? {nom:"Pâtes complètes cuites OU riz complet cuit",cru:0,cuit:Math.round(g*3.5),g:g,note:Math.round(g*3.5)+"g cuit — ENLEVER en jour off"}
+      : pick(GLUC_LENTS);
+    var qteCuit = glucSrc.cru ? Math.round(g/glucSrc.g*glucSrc.cuit)+'g cuit' : Math.round(g*1.2)+'g';
+    var qteCru = glucSrc.cru ? '(peser cru : '+Math.round(g/glucSrc.g*glucSrc.cru)+'g)' : '';
+
+    html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--bl);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;">Protéines <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+    html += '<div class="a-row"><div class="a-dot" style="background:#1a5c9e"></div><div class="a-info"><div class="a-nom">'+protSrc.nom+'</div><div class="a-qty">'+nb_prot+'g cru</div><div class="a-note">'+nb_prot+'g cru = '+Math.round(nb_prot*protSrc.cuit/protSrc.cru)+'g cuit = ~'+Math.round(nb_prot*protSrc.prot/100)+'g protéines</div></div></div>';
+    if (isDej) html += '<div style="font-family:var(--fm);font-size:10px;color:var(--n5);padding:4px 0 8px 15px;">OU 2 pilons poulet sans peau · OU 1 haut de cuisse sans peau</div>';
+
+    if (!isOff && g > 15) {
+      html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--or);letter-spacing:.07em;text-transform:uppercase;margin:10px 0 8px;display:flex;align-items:center;gap:6px;">Glucides <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+      html += '<div class="a-row"><div class="a-dot" style="background:#b8860b"></div><div class="a-info"><div class="a-nom">'+glucSrc.nom+'</div><div class="a-qty">'+qteCuit+'</div><div class="a-note">'+qteCru+(glucSrc.note?' — '+glucSrc.note:'')+'</div></div></div>';
+    } else if (isOff) {
+      html += '<div style="font-family:var(--fm);font-size:10px;color:var(--rouge);background:rgba(192,57,43,.06);border-radius:4px;padding:5px 10px;margin:8px 0;display:inline-block;">✗ ENLEVER les féculents en jour off</div>';
+    }
+
+    if (l > 5) {
+      html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--vio);letter-spacing:.07em;text-transform:uppercase;margin:10px 0 8px;display:flex;align-items:center;gap:6px;">Lipides <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+      html += buildAlimLine({nom:"Huile d\'assaisonnement de ton choix",g:l,note:Math.round(l*10/9)+"ml (1 c.à.s ≈ 9g lipides)"}, '#5c3fa0');
+      if (isDin && obj!=='seche' && obj!=='pesee') html += buildAlimLine({nom:"2 carrés de chocolat noir 85%+",g:0,note:"anti-oxydants + plaisir — fin de repas uniquement"}, '#5c3fa0');
+    }
+
+    html += '<div class="a-cat" style="font-family:var(--fm);font-size:10px;color:var(--v);letter-spacing:.07em;text-transform:uppercase;margin:10px 0 8px;display:flex;align-items:center;gap:6px;">Légumes <span style="flex:1;height:1px;background:var(--b1);"></span></div>';
+    html += buildAlimLine({nom:"Légumes à volonté",g:0,note:"Brocoli, courgette, haricots verts, épinards, poivrons... (⚠ petits pois = féculent, pas légume)"}, '#2a7a4b');
+  }
+
+  html += '</div></div>'; // r-body + repas-bloc
+  return html;
+}
+
+function buildTemplate(poids, obj, nrepas, horaire, typeJour, discipline) {
+  var isOff = typeJour === 'repos';
+  var gluc = glucJour(poids, obj, typeJour);
+  var macros = calcMacros(poids, obj, typeJour); // macros ajustées au type de journée
+  var prot = macros.prot;
+  var lip = Math.max(Math.round((macros.kcal - prot*4 - gluc*4) / 9), 30);
+  var kcal = Math.round(prot*4 + gluc*4 + lip*9);
+  var hasHoraire = horaire && horaire !== '';
+  var isMatin = hasHoraire && (horaire === 'jeun' || horaire === 'matin');
+  var isSoir = hasHoraire && (horaire === 'soir' || horaire === 'nuit');
+  var isCombat = ['mma','boxe','muaythai','judo','bjj','lutte'].includes(discipline||'');
+
+  var html = '<div class="mac-row">'
+    + '<div class="mac kc"><div class="mac-l">Total</div><div class="mac-v">'+kcal+'</div><div class="mac-u">kcal</div></div>'
+    + '<div class="mac pr"><div class="mac-l">Protéines</div><div class="mac-v">'+prot+'</div><div class="mac-u">g</div></div>'
+    + '<div class="mac gl"><div class="mac-l">Glucides</div><div class="mac-v">'+gluc+'</div><div class="mac-u">g</div></div>'
+    + '<div class="mac li"><div class="mac-l">Lipides</div><div class="mac-v">'+lip+'</div><div class="mac-u">g</div></div>'
+    + '</div>';
+
+  // Grille de répartition selon nrepas et horaire
+  var cfgs;
+  if (nrepas === 3) {
+    cfgs = [
+      {nom:'Petit-déjeuner', heure:'07:30', pR:.25, gR:.30, lR:.30},
+      {nom:'Déjeuner', heure:'12:30', pR:.40, gR:.42, lR:.35},
+      {nom:'Dîner', heure:'19:30', pR:.35, gR:.28, lR:.35},
+    ];
+  } else if (nrepas === 5) {
+    cfgs = isMatin ? [
+      {nom:'Petit-déjeuner', heure:'07:00', pR:.18, gR:.20, lR:.22},
+      {nom:'Avant entraînement', heure:'09:30', pR:.10, gR:.25, lR:.05},
+      {nom:'Déjeuner / Post-effort', heure:'12:00', pR:.28, gR:.22, lR:.25},
+      {nom:'Collation 16h', heure:'16:00', pR:.18, gR:.15, lR:.08},
+      {nom:'Dîner', heure:'19:30', pR:.26, gR:.18, lR:.40},
+    ] : [
+      {nom:'Petit-déjeuner', heure:'07:30', pR:.20, gR:.22, lR:.25},
+      {nom:'Déjeuner', heure:'12:30', pR:.28, gR:.30, lR:.27},
+      {nom:'Collation 16h', heure:'16:00', pR:.15, gR:.15, lR:.08},
+      {nom: isOff?'Dîner':'Avant entraînement / Dîner', heure:'19:00', pR:.18, gR:.20, lR:.12},
+      {nom:'Dîner tard / Post-effort', heure:'21:00', pR:.19, gR:.13, lR:.28},
+    ];
+  } else {
+    // 4 repas (défaut)
+    cfgs = isMatin ? [
+      {nom:'Petit-déjeuner', heure:'07:30', pR:.22, gR:.28, lR:.28},
+      {nom: isOff?'Déjeuner':'Avant entraînement / Déjeuner', heure:'11:30', pR:.30, gR:.35, lR:.25},
+      {nom: isOff?'Collation 16h':'Collation 16h / Post-effort', heure:'16:00', pR:.20, gR:.20, lR:.12},
+      {nom:'Dîner', heure:'19:30', pR:.28, gR:.17, lR:.35},
+    ] : isSoir ? [
+      {nom:'Petit-déjeuner', heure:'07:30', pR:.22, gR:.25, lR:.28},
+      {nom:'Déjeuner', heure:'12:30', pR:.30, gR:.33, lR:.28},
+      {nom: isOff?'Collation 16h':'Avant entraînement', heure:'17:30', pR:.14, gR:.25, lR:.08},
+      {nom: isOff?'Dîner':'Dîner / Post-effort', heure:'20:30', pR:.34, gR:.17, lR:.36},
+    ] : [
+      {nom:'Petit-déjeuner', heure:'07:30', pR:.22, gR:.25, lR:.28},
+      {nom:'Déjeuner', heure:'12:30', pR:.33, gR:.38, lR:.30},
+      {nom:'Collation 16h', heure:'16:00', pR:.13, gR:.15, lR:.08},
+      {nom:'Dîner', heure:'19:30', pR:.32, gR:.22, lR:.34},
+    ];
+  }
+
+  cfgs.forEach(function(c){
+    html += buildRepasHTML(c.nom, c.heure, Math.round(prot*c.pR), Math.round(gluc*c.gR), Math.round(lip*c.lR), obj, horaire, isOff, discipline);
+  });
+  return html;
+}
+
+// ══════════════════════════════════════════
+// GÉNÉRATION PLAN PATIENT
+// ══════════════════════════════════════════
+function calcAgePat() {
+  var ddn = document.getElementById('pb-ddn').value;
+  var age = parseAge(ddn);
+  if (age) document.getElementById('pb-age').value = age + ' ans';
+}
+
+function parseAge(ddn) {
+  var p = ddn.split('/');
+  if (p.length < 3) return null;
+  var d=parseInt(p[0]),m=parseInt(p[1]),y=parseInt(p[2]);
+  if (!d||!m||!y||y<1900||y>2020) return null;
+  var now=new Date(), age=now.getFullYear()-y;
+  if(now.getMonth()+1<m||(now.getMonth()+1===m&&now.getDate()<d)) age--;
+  return age>0&&age<120?age:null;
+}
+
+var patObjSel = 'reequil';
+function setObj(v) {
+  patObjSel = v;
+  ['reequil','seche','masse','perf','pesee','sante','seche_acc','masse_grand'].forEach(function(x){
+    var el = document.getElementById('rc-'+x);
+    if(el) el.classList.toggle('on', x===v);
+  });
+}
+
+function genPatPlan() {
+  var poids = parseFloat(document.getElementById('pb-poids').value);
+  var obj = patObjSel;
+  if (!poids || poids < 30) { alert('Veuillez renseigner votre poids.'); return; }
+  var nrepas = parseInt(document.getElementById('pb-nrepas').value) || 4;
+  var horaire = document.getElementById('pb-horaire').value;
+  var prenom = document.getElementById('pb-prenom').value || 'Patient';
+  var nom = document.getElementById('pb-nom').value || '';
+  var ddn = document.getElementById('pb-ddn').value;
+  var taille = document.getElementById('pb-taille').value;
+  var sport = document.getElementById('pb-sport').value;
+  var profession = document.getElementById('pb-profession').value;
+  var metier = document.getElementById('pb-metier').value;
+  var pas = document.getElementById('pb-pas').value;
+  var sante = document.getElementById('pb-sante').value;
+  var stress = document.getElementById('pb-stress').value;
+  var sommeil = document.getElementById('pb-som').value;
+  var allergie = document.getElementById('pb-allergie').value;
+  var macros = calcMacros(poids, obj, 'leger');
+
+  var objLabel = {reequil:'Rééquilibrage', seche:'Perte de poids', seche_acc:'Perte de poids accélérée',
+    masse:'Prise de masse propre', masse_grand:'Grande prise de masse',
+    perf:'Performance sportive', pesee:'Pesée compétition', sante:'Santé'}[obj] || obj;
+
+  // Détection sport / non-sportif
+  var sportStr = (sport || '').toLowerCase();
+  var isCombat = sportStr && (sportStr.includes('mma')||sportStr.includes('boxe')||sportStr.includes('combat')||sportStr.includes('judo')||sportStr.includes('lutte')||sportStr.includes('bjj')||sportStr.includes('grappling')||sportStr.includes('muay'));
+  var isSportif = sport && sport.trim() !== '' && !sportStr.includes('aucune') && !sportStr.includes('pas de sport');
+  var discipline = isCombat ? (sportStr.includes('mma')?'mma':sportStr.includes('judo')?'judo':sportStr.includes('bjj')?'bjj':sportStr.includes('lutte')?'lutte':sportStr.includes('muay')?'muaythai':'boxe') : (isSportif?'autre':'');
+
+  var tplLabels = isCombat
+    ? ['Jour sparring / combat', 'Jour technique / cardio', 'Jour repos / récup']
+    : isSportif
+    ? ['Jour d\'entraînement actif', 'Jour d\'activité modérée', 'Jour de repos']
+    : ['Jour actif', 'Jour modéré', 'Jour sédentaire'];
+
+  // Contexte profil pour personnalisation des conseils
+  var profil = {
+    estSportif: isSportif, isCombat: isCombat, discipline: discipline,
+    metier: metier, pas: pas, sante: sante, stress: stress,
+    sommeil: sommeil, allergie: allergie, obj: obj, prenom: prenom
+  };
+
+  var comps = buildCompsPersonnalises(profil);
+
+  var prog = buildProgHTML(
+    prenom, nom, ddn, taille, poids,
+    macros, obj, objLabel, nrepas, horaire, discipline, tplLabels,
+    comps, '', false, {}, profil
+  );
+  document.getElementById('prog-affiche').innerHTML = prog;
+  patNav('programme');
+}
+
+// Compléments personnalisés selon profil
+function buildCompsPersonnalises(profil) {
+  var comps = [];
+  var obj = profil.obj;
+  // Base universelle
+  comps.push({nom:'Oméga-3 EPAX® (EPA+DHA)',dose:'2–3 gélules/jour avec les repas',url:'https://www.nutripure.fr/fr/sante/15-omega-3-epax.html'});
+  comps.push({nom:'Magnésium Bisglycinate + B6',dose:'2 gélules/soir avant le coucher',url:'https://www.nutripure.fr/fr/sante/18-magnesium-bisglycinate.html'});
+  comps.push({nom:'Multivitamines',dose:'2 gélules/jour avec le repas principal',url:'https://www.nutripure.fr/fr/sante/multivitamines.html'});
+  // Selon objectif
+  if (obj === 'seche' || obj === 'seche_acc') {
+    comps.push({nom:'L-Carnitine Carnipure®',dose:'1–2g avant la séance — mobilisation des graisses',url:'https://www.nutripure.fr/fr/musculation/l-carnitine-carnipure.html'});
+  }
+  if (obj === 'masse' || obj === 'masse_grand') {
+    comps.push({nom:'Créatine Creapure®',dose:'3–5g/jour post-entraînement — force et volume',url:'https://www.nutripure.fr/fr/musculation/16-creatine-monohydrate-creapure.html'});
+    comps.push({nom:'Pure Gainer',dose:'1 dose dans 400ml lait après séance',url:'https://www.nutripure.fr/fr/musculation/pure-gainer.html'});
+  }
+  if (profil.isCombat) {
+    comps.push({nom:'BCAA électrolytes 2.1.1',dose:'5–10g pendant l\'effort ou sparring',url:'https://www.nutripure.fr/fr/musculation/bcaa-2-1-1.html'});
+    comps.push({nom:'Électrolytes (pastilles)',dose:'1 pastille/500ml eau à l\'effort ou au sauna',url:'https://www.nutripure.fr/fr/musculation/electrolytes.html'});
+  }
+  if (profil.estSportif && !profil.isCombat) {
+    comps.push({nom:'L-Citrulline',dose:'6g 45min avant la séance — endurance',url:'https://www.nutripure.fr/fr/musculation/l-citrulline.html'});
+  }
+  if ((profil.stress && profil.stress !== 'Faible') || (profil.sommeil && parseFloat(profil.sommeil) < 7)) {
+    comps.push({nom:'Probiotiques Pure Bio²',dose:'1 gélule/jour à jeun — microbiote et immunité',url:'https://www.nutripure.fr/fr/sante/probiotiques-pure-bio.html'});
+  }
+  if (profil.sante && profil.sante.toLowerCase().match(/arthrose|tendin|articul|genou|épaule/)) {
+    comps.push({nom:'Collagène Marin + Vitamine C',dose:'10g/jour — articulations et tendons',url:'https://www.nutripure.fr/fr/sante/collagene-marin.html'});
+  }
+  return comps;
+}
+
+// ══════════════════════════════════════════
+// GÉNÉRATION PLAN DIÉT (async pour loading)
+// ══════════════════════════════════════════
+function genDietPlan() {
+  var poids = parseFloat(gs('d-poids')) || 75;
+  var taille = gs('d-taille');
+  var prenom = gs('d-prenom');
+  var nom = gs('d-nom');
+  var ddn = gs('d-ddn');
+  var obj = S.objectif || 'reequil';
+  var nrepas = parseInt(gs('d-nrepas2')) || 4;
+  var horaire = gs('d-horseance') || '';
+  var discipline = S.discipline || '';
+  var notes = gs('d-notes');
+
+  if (!poids || poids<30) { alert('Veuillez renseigner le poids du patient.'); return; }
+
+  // Masquer les sections
+  document.querySelectorAll('.qsec').forEach(function(el){ el.classList.remove('on'); });
+  document.getElementById('ldg').classList.add('on');
+
+  var steps = ['Analyse du profil athlète...','Calcul besoins énergétiques méthode Antoine Wu...','Périodisation glucidique...','Construction des repas...','Protocole compléments...','Médecine prophétique & naturopathie...','Finalisation du programme...'];
+  var si=0;
+  var bar = document.getElementById('ldg-bar'), stepEl = document.getElementById('ldg-step');
+  var iv = setInterval(function(){
+    if(si<steps.length){ stepEl.textContent=steps[si]; bar.style.width=Math.round((si+1)/steps.length*100)+'%'; si++; }
+  }, 400);
+
+  setTimeout(function(){
+    clearInterval(iv);
+    bar.style.width='100%';
+    setTimeout(function(){
+      document.getElementById('ldg').classList.remove('on');
+
+      var macros = calcMacros(poids, obj);
+      var objLabel = {seche:'Perte de poids',seche_acc:'Perte de poids accélérée',pesee:'Pesée compétition',reequil:'Rééquilibrage',masse:'Prise de masse propre',masse_grand:'Grande prise de masse',perf:'Performance sportive',sante:'Santé / Pathologie'}[obj]||obj;
+
+      var isCombat = ['mma','boxe','muaythai','judo','bjj','lutte'].includes(discipline);
+      var tplLabels = isCombat
+        ? ['Jour sparring / combat intense','Jour technique / cardio modéré','Jour repos / récupération']
+        : ['Entraînement lourd','Entraînement léger','Jour de repos'];
+
+      // Compléments sélectionnés
+      var compSelStr = gs('d-comp-notes');
+      var compNotes = compSelStr ? compSelStr.split('\n').filter(Boolean).map(function(l){return {nom:l,dose:'',url:''};}) : [];
+      // Compléments tags sélectionnés
+      var compTags = Array.from(document.querySelectorAll('#tg-comp .tg.on')).map(function(el){ return {nom:el.textContent,dose:'',url:''}; });
+      var comps = compTags.length ? compTags : compNotes;
+
+      // Phase & dates (combat)
+      var ph1d = gs('d-ph1d'), ph1f = gs('d-ph1f'), ph2d = gs('d-ph2d'), ph2f = gs('d-ph2f');
+      var datecomp = gs('d-datecomp'), catpoids = gs('d-catpoids');
+
+      var profilDiet = {
+        estSportif: ['mma','boxe','muaythai','judo','bjj','lutte','muscu','cross','endurance'].includes(discipline),
+        isCombat: ['mma','boxe','muaythai','judo','bjj','lutte'].includes(discipline),
+        discipline: discipline, obj: obj, metier: gs('d-stress')||'', pas: '',
+        sante: gs('d-sante')||'', stress: gs('d-stress')||'', sommeil: gs('d-somh')||'',
+        allergie: '', prenom: prenom||'Patient'
+      };
+      var prog = buildProgHTML(
+        prenom||'Patient', nom, ddn, taille, poids,
+        macros, obj, objLabel, nrepas, horaire, discipline, tplLabels,
+        comps, notes, true,
+        {ph1d:ph1d, ph1f:ph1f, ph2d:ph2d, ph2f:ph2f, datecomp:datecomp, catpoids:catpoids},
+        profilDiet
+      );
+
+      document.getElementById('plan-content').innerHTML = prog;
+      document.getElementById('plan-wrap').classList.add('on');
+      window.scrollTo(0,0);
+    }, 200);
+  }, 3000);
+}
+
+function buildProgHTML(prenom, nom, ddn, taille, poids, macros, obj, objLabel, nrepas, horaire, discipline, tplLabels, comps, notes, isDiet, phases, profil) {
+  phases = phases || {};
+  var isCombat = ['mma','boxe','muaythai','judo','bjj','lutte'].includes(discipline);
+  var discLabel = {mma:'MMA',boxe:'Boxe',muaythai:'Muay Thaï',judo:'Judo',bjj:'BJJ / Grappling',lutte:'Lutte',muscu:'Musculation',cross:'CrossFit',endurance:'Endurance',autre:'Autre'}[discipline] || discipline || 'Sport';
+  var hydra = obj==='seche'||obj==='pesee' ? '1,5L d\'eau minérale de préférence + 2L les jours d\'entraînement' : '2–3L/jour + 500ml supplémentaires les jours d\'entraînement';
+
+  var kk = {seche:28,seche_acc:24,pesee:28,reequil:35,sante:35,masse:40,perf:40,masse_grand:44,digestion:30}[obj]||35;
+  var kcalMin = Math.round(macros.kcal * 0.9), kcalMax = macros.kcal;
+  var protMin = Math.round(macros.prot * 0.95), protMax = macros.prot;
+  var lipMin = Math.round(macros.lip * 0.9), lipMax = macros.lip;
+  var glucMin = glucJour(poids, obj, 'repos'), glucMax = glucJour(poids, obj, 'lourd');
+
+  var html = '<div class="prog-wrap">';
+
+  // HERO
+  html += '<div class="prog-hero">';
+  if (isCombat) html += '<div class="prog-disc">🥊 '+discLabel+'</div>';
+  html += '<div class="prog-nom">'+(prenom||'Patient').toUpperCase()+' '+(nom||'').toUpperCase()+'</div>';
+  html += '<div class="prog-info-grid">';
+  if (ddn) html += '<div class="prog-info-item"><div class="prog-info-label">Date de naissance</div><div class="prog-info-val">'+ddn+'</div></div>';
+  html += '<div class="prog-info-item"><div class="prog-info-label">Données corporelles</div><div class="prog-info-val">'+(ddn?parseAge(ddn)+' ans / ':'')+(taille||'—')+' cm / '+poids+' kg</div></div>';
+  if (phases.datecomp) html += '<div class="prog-info-item"><div class="prog-info-label">Date de compétition</div><div class="prog-info-val" style="color:#6fcf97;">'+phases.datecomp+'</div></div>';
+  if (phases.catpoids) html += '<div class="prog-info-item"><div class="prog-info-label">Objectif de poids</div><div class="prog-info-val">−'+phases.catpoids+' kg avant watercut</div></div>';
+  if (phases.ph1d) html += '<div class="prog-info-item"><div class="prog-info-label">Phase 1</div><div class="prog-info-val">'+phases.ph1d+' → '+(phases.ph1f||'—')+'</div></div>';
+  if (phases.ph2d) html += '<div class="prog-info-item"><div class="prog-info-label">Phase 2</div><div class="prog-info-val">'+phases.ph2d+' → '+(phases.ph2f||'—')+'</div></div>';
+  html += '</div>';
+  html += '<div class="prog-note">ℹ Le programme évolue. Je t\'enverrai les ajustements au fur et à mesure de la prise en charge diététique. Je t\'accompagne jusqu\'à la date de la compétition.</div>';
+  html += '</div>';
+
+  // BESOINS JOURNALIERS — différenciation 3 types de journées
+  var macrosLourd  = calcMacros(poids, obj, 'lourd');
+  var macrosMoyen  = calcMacros(poids, obj, 'leger');
+  var macrosRepos  = calcMacros(poids, obj, 'repos');
+  var glucLourd    = glucJour(poids, obj, 'lourd');
+  var glucMoyen    = glucJour(poids, obj, 'leger');
+  var glucReposV   = glucJour(poids, obj, 'repos');
+
+  html += '<div style="font-family:var(--fh);font-size:22px;letter-spacing:1px;margin-bottom:6px;">Mes besoins journaliers</div>';
+  html += '<div style="font-family:var(--fm);font-size:10px;color:var(--n5);margin-bottom:14px;letter-spacing:.05em;">Protéines constantes · glucides et calories varient selon l\'intensité de la journée</div>';
+
+  // Tableau 3 journées
+  html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">';
+  var jourData = [
+    {label: tplLabels[0], icon:'⚡', color:'var(--rouge)', m: macrosLourd, g: glucLourd},
+    {label: tplLabels[1], icon:'🏃', color:'var(--or)',    m: macrosMoyen, g: glucMoyen},
+    {label: tplLabels[2], icon:'🌙', color:'var(--bl)',    m: macrosRepos, g: glucReposV},
+  ];
+  jourData.forEach(function(j){
+    html += '<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r2);padding:14px;border-top:3px solid '+j.color+';">';
+    html += '<div style="font-size:11px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px;">'+j.icon+' '+j.label+'</div>';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">';
+    html += '<div style="text-align:center;background:var(--bg3);border-radius:6px;padding:8px;"><div style="font-family:var(--fm);font-size:9px;color:var(--n5);text-transform:uppercase;letter-spacing:.08em;">Énergie</div><div style="font-family:var(--fh);font-size:22px;color:'+j.color+';">'+j.m.kcal+'</div><div style="font-size:10px;color:var(--n5);">kcal</div></div>';
+    html += '<div style="text-align:center;background:var(--bg3);border-radius:6px;padding:8px;"><div style="font-family:var(--fm);font-size:9px;color:var(--n5);text-transform:uppercase;letter-spacing:.08em;">Glucides</div><div style="font-family:var(--fh);font-size:22px;color:var(--or);">'+j.g+'</div><div style="font-size:10px;color:var(--n5);">g</div></div>';
+    html += '<div style="grid-column:1/-1;display:flex;gap:6px;margin-top:2px;">';
+    html += '<div style="flex:1;text-align:center;background:var(--bg3);border-radius:6px;padding:6px;"><div style="font-family:var(--fm);font-size:9px;color:var(--bl);">Prot.</div><div style="font-family:var(--fh);font-size:18px;color:var(--bl);">'+j.m.prot+'g</div></div>';
+    html += '<div style="flex:1;text-align:center;background:var(--bg3);border-radius:6px;padding:6px;"><div style="font-family:var(--fm);font-size:9px;color:var(--vio);">Lip.</div><div style="font-family:var(--fh);font-size:18px;color:var(--vio);">'+j.m.lip+'g</div></div>';
+    html += '</div></div></div>';
+  });
+  html += '</div>';
+  html += '<div style="background:rgba(26,92,158,.06);border:1px solid rgba(26,92,158,.15);border-radius:var(--r);padding:10px 14px;margin-bottom:18px;font-size:12px;color:var(--n4);">💧 <b>Hydratation :</b> '+hydra+'</div>';
+
+  // COMPLÉMENTS
+  if (comps && comps.length) {
+    html += '<div class="comp-sec"><div class="comp-title">Compléments alimentaires recommandés</div>';
+    comps.forEach(function(c){
+      html += '<div class="comp-item"><span class="comp-nom">'+(c.nom||'')+'</span>';
+      if(c.dose) html += '<span class="comp-dose">'+c.dose+'</span>';
+      if(c.url) html += '<a href="'+c.url+'" target="_blank" style="font-family:var(--fm);font-size:10px;color:var(--v);margin-left:auto;">nutripure.fr →</a>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // TIMING NUTRITIONNEL
+  if (horaire) {
+    html += '<div class="timing-b"><div class="timing-t">⏱ Timing nutritionnel — '+({jeun:'Matin à jeun',matin:'Matin après PDJ',midi:'Midi',apm:'Après-midi',soir:'Soir',nuit:'Nuit'}[horaire]||horaire)+'</div>';
+    var timingRows = horaire==='jeun'
+      ? [{l:'Réveil',v:'Eau tiède + dattes Ajwa (3) — sunna recommandée'},{l:'Pré-séance',v:'BCAA électrolytes si séance >60 min'},{l:'Post-séance 30min',v:'Fromage blanc + fruit ou riz blanc — fenêtre anabolique'},{l:'Petit-déjeuner',v:'Repas complet (1h30 après la séance)'}]
+      : horaire==='soir'||horaire==='nuit'
+      ? [{l:'Déjeuner',v:'Repas principal — protéines + féculents IG bas + légumes'},{l:'Avant séance (1h30)',v:'Féculent léger + protéine maigre — éviter graisses et fibres excessives'},{l:'Post-séance = dîner',v:'Protéines + légumes + féculents selon objectif'},{l:'Avant coucher',v:'Skyr ou fromage blanc si prise de masse · tisane gingembre-citron'}]
+      : [{l:'PDJ 2h avant',v:'Féculents + protéines + peu de graisses'},{l:'Pré-séance 30min',v:'Dattes ou banane si besoin d\'énergie'},{l:'Post-séance',v:'Protéines rapides + glucides dans les 30min'},{l:'Dîner',v:'Repas complet équilibré'}];
+    timingRows.forEach(function(r){ html += '<div class="timing-row"><span class="timing-lbl">'+r.l+'</span><span style="font-size:12px;color:var(--n4);">'+r.v+'</span></div>'; });
+    html += '</div>';
+  }
+
+  // TEMPLATE TABS
+  html += '<div class="tpl-tabs">';
+  tplLabels.forEach(function(lbl,i){
+    html += '<button class="ttab'+(i===0?' on':'')+'" onclick="selTpl('+i+',this)">'+lbl+'</button>';
+  });
+  html += '</div>';
+
+  var types = ['lourd','leger','repos'];
+  types.forEach(function(type,i){
+    html += '<div class="tbdy'+(i===0?' on':'')+'" id="tpl'+i+'">';
+    html += buildTemplate(poids, obj, nrepas, horaire, type, discipline);
+    html += '</div>';
+  });
+
+  // CONSEIL JOURS OFF
+  html += '<div class="note rouge" style="margin-top:16px;"><b>Jours OFF :</b> Enlever les féculents au déjeuner et au dîner. Sauter les glucides du petit-déjeuner si pas d\'entraînement le matin.</div>';
+
+  // PROTOCOLES COMBAT — waterloading, cutting, acclimatation
+  if (isCombat) {
+    html += '<div style="background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.2);border-radius:var(--r2);padding:18px 20px;margin-top:18px;">';
+    html += '<div style="font-family:var(--fh);font-size:20px;letter-spacing:1px;margin-bottom:4px;">⚖️ Protocoles compétition</div>';
+    html += '<div style="font-family:var(--fm);font-size:10px;color:var(--rouge);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;">Fight camp · Waterloading · Cutting · Acclimatation chaleur</div>';
+
+    // Fight camp
+    html += '<div style="margin-bottom:18px;">';
+    html += '<div style="font-size:12px;font-weight:700;color:var(--rouge);margin-bottom:8px;">🥊 Fight Camp (4–8 semaines avant)</div>';
+    html += '<div style="font-size:12px;color:var(--n4);line-height:1.8;">'
+      + '→ <b>Calories :</b> 28 kcal/kg/jour — déficit contrôlé, descente progressive<br>'
+      + '→ <b>Protéines :</b> 2,2–2,5 g/kg/jour (minimum 154g pour 70kg) — répartis sur tous les repas et collations<br>'
+      + '→ <b>Glucides :</b> cyclés selon séances (sparring = charge, repos = restriction)<br>'
+      + '→ <b>Lipides :</b> 0,8–1 g/kg/jour — huile olive, avocat, poissons gras 2x/semaine<br>'
+      + '→ <b>Créatine :</b> à arrêter 7–10 jours avant la pesée (rétention eau intra-musculaire)<br>'
+      + '→ <b>Poids :</b> peser chaque matin à jeun — perte max 0,5–0,8 kg/semaine'
+      + '</div></div>';
+
+    // Fight week
+    html += '<div style="margin-bottom:18px;">';
+    html += '<div style="font-size:12px;font-weight:700;color:var(--rouge);margin-bottom:8px;">📅 Fight Week (7 derniers jours)</div>';
+    html += '<div style="font-size:12px;color:var(--n4);line-height:1.8;">'
+      + '→ <b>Réduire progressivement les féculents</b> (riz, pâtes, pain) — maximiser protéines maigres et légumes faibles en glucides<br>'
+      + '→ <b>Lipides sains maintenus</b> : avocat, huile olive, noix, beurre — soutien hormonal<br>'
+      + '→ <b>Sodium maintenu jusqu\'à J–2</b> puis temporairement réduit avant pesée<br>'
+      + '→ <b>Hydratation réduite mais jamais à sec</b> — ne jamais priver totalement (danger cardiaque et rénal)<br>'
+      + '→ <b>Journée type Fight Week :</b> œufs + épinards + avocat / saumon + brocolis / poulet + courgettes'
+      + '</div></div>';
+
+    // Post-pesée
+    html += '<div style="margin-bottom:18px;">';
+    html += '<div style="font-size:12px;font-weight:700;color:var(--v);margin-bottom:8px;">✅ Post-pesée — Réhydratation (si combat le lendemain ou le soir)</div>';
+    html += '<div style="font-size:12px;color:var(--n4);line-height:1.8;">'
+      + '→ <b>Étape 1 immédiate :</b> 500ml eau plate + pincée de sel de Guérande + 20g miel ou maltodextrine<br>'
+      + '→ <b>Ensuite :</b> 250ml toutes les 45 min — jamais d\'un coup (choc osmotique)<br>'
+      + '→ <b>Recharge solide :</b> galettes de riz + miel + fruit / riz blanc + poulet / pâtes + sauce simple<br>'
+      + '→ <b>4 prises fractionnées</b> de 20–30g protéines (whey, yaourt protéiné, œufs, poulet/dinde)<br>'
+      + '→ <b>Peu de fibres et de graisses</b> — préserver le confort digestif avant le combat'
+      + '</div></div>';
+
+    // Acclimatation chaleur
+    html += '<div style="background:rgba(184,134,11,.08);border-radius:8px;padding:14px;">';
+    html += '<div style="font-size:12px;font-weight:700;color:var(--or);margin-bottom:8px;">🌡️ Acclimatation à la chaleur (sauna / bain chaud)</div>';
+    html += '<div style="font-size:12px;color:var(--n4);line-height:1.8;">'
+      + '→ <b>Uniquement sur jours de repos</b> ou entraînement très léger — jamais en état de fatigue ou après une séance intense<br>'
+      + '→ <b>Démarrer par 10–15 min</b> de sauna ou bain chaud à 39–42°C<br>'
+      + '→ <b>Augmenter progressivement</b> de +5 min/session — ne jamais dépasser 40 min au total, ni 42°C<br>'
+      + '→ <b>Matériel obligatoire :</b> minuteur, thermomètre, eau tempérée, serviette froide, téléphone, présence d\'un proche ou du coach<br>'
+      + '→ <b>Arrêt immédiat si :</b> vertiges, crampes, nausées, étourdissements, frissons, maux de tête<br>'
+      + '→ <b>Après la session :</b> douche tiède, compression froide, réhydratation électrolytes immédiate<br>'
+      + '→ <b>But :</b> habituer le corps à transpirer plus vite — facilite le cutting d\'eau le jour J'
+      + '</div></div>';
+
+    html += '</div>'; // fin protocoles combat
+  }
+
+  // CONSEILS PERSONNALISÉS AU CAS PAR CAS
+  if (profil) {
+    var conseils = [];
+    var p = profil;
+    var estSportif = p.estSportif;
+    var prn = p.prenom || 'vous';
+
+    // Hydratation adaptée
+    if (p.metier === 'tres_actif' || p.pas === 'plus12000') {
+      conseils.push({icon:'💧', titre:'Hydratation renforcée', tag:'Important',
+        corps:'Votre niveau d\'activité est élevé. Visez 3 à 3,5L d\'eau par jour minimum. Urine jaune pâle = bonne hydratation. En cas d\'effort intense ou de chaleur (Dubai), ajoutez des électrolytes pour compenser les pertes minérales.'});
+    } else if (p.metier === 'sedentaire' && (!p.pas || p.pas === 'moins2000')) {
+      conseils.push({icon:'🚶', titre:'Bougez plus au quotidien', tag:'Priorité',
+        corps:'Votre sédentarité professionnelle est un facteur limitant. Objectif simple : 8 000 pas/jour. Marche de 30 min le matin ou le soir, escaliers plutôt qu\'ascenseur, pause active toutes les 1h30. Ce seul changement peut faire une vraie différence sur votre composition corporelle.'});
+    }
+
+    // Alimentation selon objectif
+    if (!estSportif && (obj === 'reequil' || obj === 'sante')) {
+      conseils.push({icon:'🥗', titre:'Construire des habitudes durables', tag:'Alimentation',
+        corps:'L\'objectif n\'est pas un régime, c\'est une réorganisation progressive. Commencez par structurer 3 repas fixes par jour avec une source de protéines à chaque repas. Pas de comptage de calories au début — juste de la régularité. Les résultats viennent en 3 à 6 semaines.'});
+    }
+    if (!estSportif && (obj === 'seche' || obj === 'seche_acc')) {
+      conseils.push({icon:'⚖️', titre:'Déficit sans frustration', tag:'Perte de poids',
+        corps:'Même sans sport intense, vous pouvez perdre du poids efficacement. La clé : protéines à chaque repas (satiété +30%), légumes à volonté, féculents à ajuster en derniers si les résultats stagnent. Ne sautez jamais de repas — cela déclenche les fringales du soir.'});
+    }
+
+    // Stress
+    if (p.stress && (p.stress === 'Élevé' || p.stress === 'Très élevé')) {
+      conseils.push({icon:'🧠', titre:'Gérer le stress — axe clé pour vous', tag:'Priorité',
+        corps:'Un stress chronique élève le cortisol, qui stocke les graisses abdominales et freine la récupération. Technique concrète : cohérence cardiaque 3 fois/jour, 5 min (4s inspiration, 6s expiration). Magnésium bisglycinate le soir. Adaptogènes (ashwagandha, rhodiola) si le stress est professionnel ou prolongé.'});
+    }
+
+    // Sommeil
+    if (p.sommeil && parseFloat(p.sommeil) < 7) {
+      conseils.push({icon:'🌙', titre:'Sommeil — votre levier numéro 1', tag:'Récupération',
+        corps:'Moins de 7h de sommeil = récupération compromise, cortisol élevé, prise de gras facilitée. Priorité absolue avant tout complément : dîner riche en glucides complexes (riz, patate douce, quinoa) pour favoriser la sérotonine. Écrans coupés 1h avant le coucher. Chambre à 18°C.'});
+    }
+
+    // Profession sédentaire + pas de sport
+    if (!estSportif && p.metier === 'sedentaire') {
+      conseils.push({icon:'🏃', titre:'Introduire l\'activité physique progressivement', tag:'Activité',
+        corps:'Pas besoin de salle de sport. Commencez par 3 marches de 30 min/semaine — cela suffit pour activer le métabolisme. Après 4 semaines, ajoutez 2 séances de musculation légère (kettlebell à domicile ou corps) ou du vélo. L\'objectif est de construire une habitude, pas de vous épuiser.'});
+    }
+
+    // Sports de combat
+    if (p.isCombat) {
+      conseils.push({icon:'🥊', titre:'Nutrition des sports de combat — vos spécificités', tag:'Combat',
+        corps:'Votre sport combine efforts anaérobies, glycogène intense et stress nerveux. Priorités : 1) Ne jamais s\'entraîner en déficit glycémique (performance et blessures ++) 2) Post-sparring : glucides rapides + protéines dans les 30 min 3) Oméga-3 quotidiens — protection cérébrale et nerveuse 4) Électrolytes à chaque effort de plus de 60 min.'});
+      conseils.push({icon:'💪', titre:'Prévention des blessures — nutrition articulaire', tag:'Santé',
+        corps:'Les sports de combat créent des microtraumatismes répétés. Intégrez : collagène marin + vit C (10g/jour à jeun), curcuma + poivre noir à chaque repas chaud, oméga-3 (réduction inflammation), et magnésium bisglycinate pour les crampes et la relaxation musculaire nocturne.'});
+    }
+
+    // Santé spécifique
+    if (p.sante) {
+      var sLow = p.sante.toLowerCase();
+      if (sLow.match(/cholest/)) {
+        conseils.push({icon:'❤️', titre:'Cholestérol — alimentation adaptée', tag:'Santé',
+          corps:'Votre programme privilégie les graisses insaturées (huile olive, avocat, poissons gras 2–3x/sem). Réduisez graisses saturées et trans. Les fibres solubles (avoine, légumineuses) réduisent l\'absorption du LDL. Stérols végétaux (margarine enrichie) peuvent aider en complément médical.'});
+      }
+      if (sLow.match(/digest|intestin|colon|reflux|sii/)) {
+        conseils.push({icon:'🫁', titre:'Confort digestif — stratégie personnalisée', tag:'Santé',
+          corps:'Introduisez les fibres progressivement. Évitez les légumineuses en grande quantité au début. Kéfir et yaourt nature pour le microbiote. Evitez de manger trop vite — mastication lente, repas assis. Gingembre frais en tisane après les repas. Aloe vera 30ml à jeun si troubles persistants.'});
+      }
+      if (sLow.match(/diabèt|insulino|glycém/)) {
+        conseils.push({icon:'📊', titre:'Glycémie — alimentation à index glycémique bas', tag:'Santé',
+          corps:'Favorisez les glucides complexes à IG bas (lentilles, pois chiches, patate douce, flocons d\'avoine). Ne jamais consommer de glucides seuls — toujours avec une protéine et/ou une source de fibres. Vinaigre de cidre brut (1 c.à.c dans l\'eau avant les repas) améliore la sensibilité à l\'insuline.'});
+      }
+    }
+
+    if (conseils.length > 0) {
+      html += '<div style="margin-top:22px;">';
+      html += '<div style="font-family:var(--fh);font-size:22px;letter-spacing:1px;margin-bottom:14px;">Conseils personnalisés</div>';
+      html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;">';
+      conseils.forEach(function(cv){
+        var tc = cv.tag==='Priorité'?'var(--rouge)':cv.tag==='Combat'?'var(--rouge)':cv.tag==='Santé'?'var(--bl)':cv.tag==='Récupération'?'var(--vio)':'var(--v)';
+        html += '<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r2);padding:18px;">';
+        html += '<div style="font-family:var(--fm);font-size:9px;padding:2px 10px;border-radius:4px;display:inline-block;margin-bottom:8px;background:'+tc+'22;color:'+tc+';letter-spacing:.06em;">'+cv.tag+'</div>';
+        html += '<div style="font-size:20px;margin-bottom:6px;">'+cv.icon+'</div>';
+        html += '<div style="font-family:var(--fh);font-size:18px;letter-spacing:1px;margin-bottom:8px;">'+cv.titre+'</div>';
+        html += '<div style="font-size:13px;color:var(--n4);line-height:1.7;">'+cv.corps+'</div>';
+        html += '</div>';
+      });
+      html += '</div></div>';
+    }
+  }
+
+  // SUNNA & NATURO
+  html += '<div style="background:rgba(184,134,11,.07);border:1px solid rgba(184,134,11,.2);border-radius:var(--r2);padding:18px 20px;margin-top:18px;">';
+  html += '<div style="font-family:var(--fh);font-size:18px;letter-spacing:1px;margin-bottom:12px;">Recommandations quotidiennes</div>';
+  [
+    ['Matin à jeun','1 c.à.c d\'huile de nigelle (Habba Sawda) + 3 dattes Ajwa — baraka et anti-inflammatoire naturel'],
+    ['Avec les repas','Curcuma + poivre noir dans chaque plat chaud — anti-inflammatoire puissant'],
+    ['Miel brut sidr ou Manuka','1 c.à.s le matin ou dans une tisane — antimicrobien et cicatrisant'],
+    ['Tisane du soir','Gingembre frais + citron — digestion, récupération, immunité'],
+    ['Vinaigre de cidre brut','1 c.à.c dans verre d\'eau avant le repas principal — glycémie et digestion'],
+  ].forEach(function(r){
+    html += '<div style="display:flex;gap:10px;margin-bottom:7px;font-size:13px;"><span style="color:var(--or);flex-shrink:0;">→</span><div><b>'+r[0]+'</b> — '+r[1]+'</div></div>';
+  });
+  html += '</div>';
+
+  // LISTE DE COURSES
+  html += '<div style="margin-top:22px;">';
+  html += '<div style="font-family:var(--fh);font-size:22px;letter-spacing:1px;margin-bottom:14px;">Liste de courses — semaine type</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">';
+  var courses = [
+    {t:'Protéines',c:'#1a5c9e',items:['Blanc de poulet (1.5kg)','Bœuf haché 5% MG (500g)','Saumon frais (400g)','Thon conserve nature (4 boîtes)','Kéfir nature (500ml)','Œufs BIO (12)','Fromage blanc 0% (1kg)']},
+    {t:'Féculents',c:'#b8860b',items:['Riz basmati (1kg)','Patate douce (1kg)','Flocons d\'avoine (500g)','Pâtes complètes (500g)','Lentilles vertes (400g)','Pois chiches secs (400g)']},
+    {t:'Légumes',c:'#2a7a4b',items:['Brocoli surgelé (1kg)','Haricots verts surgelés (500g)','Courgettes (4)','Épinards frais (300g)','Tomates cerises (300g)','Salade verte','Concombre (2)']},
+    {t:'Fruits & glucides rapides',c:'#c0392b',items:['Bananes (régime)','Dattes Medjool (200g)','Dattes Deglet Nour (500g)','Jus de raisins (1L)','Fruits rouges surgelés (500g)']},
+    {t:'Lipides & assaisonnement',c:'#5c3fa0',items:['Huile d\'olive extra-vierge (500ml)','Graines de chia (200g)','Amandes nature (150g)','Chocolat noir 85%+ (100g)']},
+    {t:'Sunna & épices',c:'#b8860b',items:['Huile de nigelle (50ml)','Miel sidr ou Manuka','Vinaigre de cidre brut','Curcuma + poivre noir','Gingembre frais','Cannelle de Ceylan','Sel de Guérande']},
+  ];
+  courses.forEach(function(cat){
+    html += '<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:14px 16px;">';
+    html += '<div style="font-family:var(--fm);font-size:10px;color:'+cat.c+';letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px;">'+cat.t+'</div>';
+    cat.items.forEach(function(item){ html += '<div style="display:flex;gap:7px;font-size:12px;color:var(--n4);padding:3px 0;"><span style="color:var(--v);">•</span>'+item+'</div>'; });
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  // PARTENAIRES
+  html += '<div style="margin-top:22px;">';
+  html += '<div style="font-family:var(--fh);font-size:22px;letter-spacing:1px;margin-bottom:14px;">Sites partenaires</div>';
+  html += '<div class="partners-grid">';
+  [{nom:'Nutripure',remise:'−10%',code:'LIFTEAT',url:'https://www.nutripure.fr'},{nom:'Ruche d\'Orient',remise:'−15%',code:'LIFTEAT15',url:'https://ruche-dorient.fr'},{nom:'Ozers',remise:'−15%',code:'LIFTEAT15',url:'https://ozers.fr'},{nom:'OKO Europe',remise:'−10%',code:'OKOLIFTEAT',url:'https://okoeurope.com'},{nom:'High One Sport',remise:'−15%',code:'LIFTEAT15',url:'https://highonesport.com'}].forEach(function(p){
+    html += '<div class="partner-card"><div class="partner-nom">'+p.nom+'</div><div class="partner-remise">'+p.remise+'</div><div class="partner-code" onclick="copyCode(&apos;'+p.code+'&apos;,this)">'+p.code+'</div></div>';
+  });
+  html += '</div></div>';
+
+  // NOTES CLINIQUES
+  if (notes) {
+    html += '<div class="note" style="margin-top:18px;"><b>Notes cliniques :</b> '+notes+'</div>';
+  }
+
+  // FOOTER
+  html += '<div class="prog-footer"><div class="pf-left"><div><div class="pf-name">ANTOINE WU</div><div class="pf-title">DIÉTÉTICIEN-NUTRITIONNISTE</div></div></div>'
+    + '<div class="pf-links"><div class="pf-link"><b>Instagram</b> Lift__eat</div><div class="pf-link"><b>Site web</b> www.lifteat.fr</div><div class="pf-link"><b>Doctolib</b> Antoine WU</div></div></div>';
+
+  html += '</div>'; // prog-wrap
+  return html;
+}
+
+
+function selTpl(i, btn) {
+  document.querySelectorAll('.ttab').forEach(function(t,j){ t.classList.toggle('on',j===i); });
+  document.querySelectorAll('.tbdy').forEach(function(b,j){ b.classList.toggle('on',j===i); });
+}
+
+function nouveauPlan() {
+  document.getElementById('plan-wrap').classList.remove('on');
+  dietNav(1);
+  window.scrollTo(0,0);
+}
+
+// ══════════════════════════════════════════
+// DIÉT NAV & PILLS
+// ══════════════════════════════════════════
+var PILL_LABELS = ['Identité','Alimentation','Santé','Sport','Objectif','Holistique','Génération'];
+
+function initDietPills() {
+  var el = document.getElementById('diet-pills');
+  el.innerHTML = PILL_LABELS.map(function(l,i){
+    return '<button class="pill'+(i===0?' on':'')+'" id="dp'+(i+1)+'" onclick="dietNav('+(i+1)+')">'
+      + String(i+1).padStart(2,'0')+' '+l+'</button>';
+  }).join('');
+}
+
+function dietNav(n) {
+  for(var i=1;i<=7;i++){
+    var sec = document.getElementById('ds'+i);
+    var pill = document.getElementById('dp'+i);
+    if(sec) sec.classList.toggle('on', i===n);
+    if(pill){
+      pill.classList.remove('on','ok');
+      if(i===n) pill.classList.add('on');
+      else if(i<n) pill.classList.add('ok');
+    }
+    var tab = document.getElementById('dt-'+i);
+    if(tab) tab.classList.toggle('on', i===n);
+  }
+  if(n===7) buildDietRecap();
+  window.scrollTo(0,0);
+}
+
+function dietNext(n) { dietNav(n+1); }
+function dietPrev(n) { dietNav(n-1); }
+
+function buildDietRecap() {
+  var p = gs('d-poids'), t = gs('d-taille'), prenom = gs('d-prenom'), nom = gs('d-nom');
+  var obj = S.objectif || 'reequil';
+  var kk = kcalKg(obj);
+  var macros = p ? calcMacros(parseFloat(p), obj) : {kcal:0,prot:0,gluc:0,lip:0};
+  var recap = document.getElementById('diet-recap');
+  if(!recap) return;
+  recap.innerHTML = '<div class="fg-lbl" style="margin-bottom:12px;">Récapitulatif</div>'
+    + '<div class="g2">'
+    + '<div><div style="font-size:12px;color:var(--n5);margin-bottom:4px;">Patient</div><div style="font-weight:600;">'+(prenom||'—')+' '+(nom||'')+'</div>'
+    + '<div style="font-size:12px;color:var(--n5);margin-top:4px;">'+(p||'—')+' kg · '+(t||'—')+' cm · Méthode : '+kk+' kcal/kg</div></div>'
+    + '<div><div style="font-size:12px;color:var(--n5);margin-bottom:4px;">Macros calculées</div>'
+    + '<div style="font-family:var(--fm);font-size:12px;line-height:1.8;">'
+    + 'Kcal : '+macros.kcal+'<br>Protéines : '+macros.prot+'g<br>Glucides : '+macros.gluc+'g<br>Lipides : '+macros.lip+'g'
+    + '</div></div></div>';
+}
+
+// ══════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════
+function gs(id) { var el=document.getElementById(id); return el?el.value:''; }
+function gv(id,def){ var v=parseFloat(gs(id)); return isNaN(v)?def:v; }
+
+function setRC(el, key, val) {
+  S[key] = val;
+  el.closest('.rc-g').querySelectorAll('.rc').forEach(function(c){ c.classList.remove('on'); });
+  el.classList.add('on');
+  // Afficher les dates de compétition si discipline combat
+  if (key === 'discipline') {
+    var isCombat = ['mma','boxe','muaythai','judo','bjj','lutte'].includes(val);
+    var el2 = document.getElementById('combat-dates');
+    if(el2) el2.style.display = isCombat ? 'block' : 'none';
+  }
+}
+
+function togTG(el, key) {
+  el.classList.toggle('on');
+  if (!S[key]) S[key] = [];
+  var txt = el.textContent.trim();
+  var idx = S[key].indexOf(txt);
+  if (idx > -1) S[key].splice(idx,1); else S[key].push(txt);
+}
+
+function calcAgeDiet() {
+  var ddn = gs('d-ddn');
+  var age = parseAge(ddn);
+  if(age) document.getElementById('d-age').value = age+' ans';
+}
+
+function calcIMC() {
+  var p = gv('d-poids',0), t = gv('d-taille',0);
+  if(p&&t) document.getElementById('d-imc').value = (p/Math.pow(t/100,2)).toFixed(1);
+}
+
+function copyCode(code, btn) {
+  navigator.clipboard.writeText(code).then(function(){
+    var orig = btn.textContent;
+    btn.textContent = 'COPIÉ ✓';
+    setTimeout(function(){ btn.textContent = orig; }, 2000);
+  }).catch(function(){ alert('Code : '+code); });
+}
+
+// ══════════════════════════════════════════
+// NUTRIPURE
+// ══════════════════════════════════════════
+function filterNP(cat, btn) {
+  document.querySelectorAll('.cf').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  renderNP(cat);
+}
+
+function renderNP(cat) {
+  var grid = document.getElementById('np-grid');
+  if(!grid) return;
+  var items = cat==='all' ? NP_DATA : NP_DATA.filter(function(p){ return p.cat===cat; });
+  var seen = {};
+  items = items.filter(function(p){ if(seen[p.nom]) return false; seen[p.nom]=true; return true; });
+  grid.innerHTML = items.map(function(p){
+    return '<div class="np-card">'
+      +'<div class="np-nom">'+p.nom+'</div>'
+      +'<div class="np-dose">'+p.dose+'</div>'
+      +'<div class="np-desc">'+p.desc+'</div>'
+      +'<a href="'+p.url+'" target="_blank" rel="noopener" class="np-btn">Voir sur Nutripure <span class="np-promo-badge">Code : LIFTEAT</span></a>'
+      +'</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// SUIVI HEBDO
+// ══════════════════════════════════════════
+var SLIDERS = [
+  {id:'energie',nom:'Énergie & vitalité',desc:'Comment vous êtes-vous senti(e) ?'},
+  {id:'plan',nom:'Respect du plan',desc:'Recommandations nutritionnelles suivies ?'},
+  {id:'sommeil',nom:'Qualité du sommeil',desc:'Comment avez-vous dormi ?'},
+  {id:'stress',nom:'Niveau de stress (1=très stressé)',desc:'Votre stress général'},
+  {id:'sport',nom:'Performance sportive',desc:'Séances d\'entraînement'},
+  {id:'digest',nom:'Confort digestif',desc:'Transit, ballonnements, confort'},
+  {id:'humeur',nom:'Humeur & motivation',desc:'Votre état d\'esprit'},
+];
+
+function getWeek(d) {
+  var date=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  var day=date.getUTCDay()||7;
+  date.setUTCDate(date.getUTCDate()+4-day);
+  var y=new Date(Date.UTC(date.getUTCFullYear(),0,1));
+  return Math.ceil((((date-y)/86400000)+1)/7);
+}
+
+function initSuivi() {
+  var now = new Date();
+  document.getElementById('sv-sem').textContent = 'Semaine '+getWeek(now)+' — '+now.getFullYear();
+  document.getElementById('sv-date').textContent = now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+  renderSliders();
+  renderHist();
+}
+
+function renderSliders() {
+  document.getElementById('sv-sliders').innerHTML = SLIDERS.map(function(sl){
+    return '<div class="sl-card">'
+      +'<div class="sl-row"><span class="sl-nom">'+sl.nom+'</span><span class="sl-sc" id="sc-'+sl.id+'">5</span></div>'
+      +'<div class="sl-desc">'+sl.desc+'</div>'
+      +'<div class="sl-track">'
+      +'<span class="sl-lbl">1</span>'
+      +'<input type="range" min="1" max="10" value="5" id="sl-'+sl.id+'" oninput="document.getElementById(\'sc-'+sl.id+'\').textContent=this.value">'
+      +'<span class="sl-lbl" style="text-align:right;">10</span>'
+      +'</div></div>';
+  }).join('');
+}
+
+function saveSuivi() {
+  var now = new Date();
+  var entry = {
+    week:getWeek(now), year:now.getFullYear(), date:now.toLocaleDateString('fr-FR'),
+    poids:document.getElementById('sv-poids').value,
+    scores:{}, q1:gs('svq1'), q2:gs('svq2'), q3:gs('svq3'), q4:gs('svq4'), q5:gs('svq5'), q6:gs('svq6')
+  };
+  SLIDERS.forEach(function(sl){ var el=document.getElementById('sl-'+sl.id); if(el) entry.scores[sl.id]=el.value; });
+  S.suivi_hist.unshift(entry);
+  try { localStorage.setItem('lifteat_sv', JSON.stringify(S.suivi_hist)); } catch(e){}
+  var btn = document.getElementById('sv-save-btn');
+  btn.textContent = '✓ Bilan enregistré !';
+  btn.style.background = '#1e5c38';
+  setTimeout(function(){ btn.textContent = 'Enregistrer mon bilan'; btn.style.background = ''; }, 3000);
+  // Reset
+  document.getElementById('sv-poids').value='';
+  SLIDERS.forEach(function(sl){ var el=document.getElementById('sl-'+sl.id); if(el){ el.value=5; document.getElementById('sc-'+sl.id).textContent='5';} });
+  ['svq1','svq2','svq3','svq4','svq5','svq6'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  renderHist();
+}
+
+function renderHist() {
+  var el = document.getElementById('sv-hist');
+  if(!el) return;
+  if(!S.suivi_hist.length){ el.innerHTML='<div style="text-align:center;padding:20px;color:var(--n5);font-family:var(--fm);font-size:12px;">Aucun bilan enregistré</div>'; return; }
+  el.innerHTML = S.suivi_hist.map(function(e){
+    var scores = Object.entries(e.scores||{}).map(function(kv){ return '<span class="hs">'+kv[0]+' <b>'+kv[1]+'/10</b></span>'; }).join('');
+    return '<div class="hist-item"><div><div class="hist-w">S'+e.week+' — '+e.year+'</div><div class="hist-d">'+e.date+(e.poids?' · '+e.poids+' kg':'')+'</div></div><div class="hist-scores">'+scores+'</div></div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+renderNP('all');
+</script>
+</body>
+</html>
